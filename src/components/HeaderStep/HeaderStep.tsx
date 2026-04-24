@@ -68,98 +68,16 @@ function HeaderStep() {
         
         <label htmlFor="back-color">Header background-color:</label>
         {/* Added value and onChange handler */}
-        <select name="color" id="back-color" value={bgColor} onChange={(e) => setBgColor(e.target.value)}>
-          <option value="">Select a color</option>
-          <option value="red">Red</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-          <option value="yellow">Yellow</option>
-          <option value="orange">Orange</option>
-          <option value="purple">Purple</option>
-          <option value="pink">Pink</option>
-          <option value="brown">Brown</option>
-          <option value="black">Black</option>
-          <option value="white">White</option>
-          <option value="gray">Gray</option>
-          <option value="cyan">Cyan</option>
-          <option value="magenta">Magenta</option>
-          <option value="lime">Lime</option>
-          <option value="teal">Teal</option>
-          <option value="navy">Navy</option>
-          <option value="maroon">Maroon</option>
-          <option value="olive">Olive</option>
-          <option value="silver">Silver</option>
-          <option value="gold">Gold</option>
-          <option value="beige">Beige</option>
-          <option value="coral">Coral</option>
-          <option value="turquoise">Turquoise</option>
-          <option value="violet">Violet</option>
-          <option value="indigo">Indigo</option>
-        </select>
+        <input type='color' id="back-color" className='color-picker-custom' value={bgColor} onChange={(e) => setBgColor(e.target.value)}/>
         <label htmlFor="nav-links-color">Navigation links color:</label>
-        <select 
-  name="nav-links-color" 
+        <input type='color' className='color-picker-custom'
   id="nav-links-color" 
   value={navLinkColor} 
   onChange={(e) => setNavLinkColor(e.target.value)}
->
-          <option value="">Select a color</option>
-          <option value="red">Red</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-          <option value="yellow">Yellow</option>
-          <option value="orange">Orange</option>
-          <option value="purple">Purple</option>
-          <option value="pink">Pink</option>
-          <option value="brown">Brown</option>
-          <option value="black">Black</option>
-          <option value="white">White</option>
-          <option value="gray">Gray</option>
-          <option value="cyan">Cyan</option>
-          <option value="magenta">Magenta</option>
-          <option value="lime">Lime</option>
-          <option value="teal">Teal</option>
-          <option value="navy">Navy</option>
-          <option value="maroon">Maroon</option>
-          <option value="olive">Olive</option>
-          <option value="silver">Silver</option>
-          <option value="gold">Gold</option>
-          <option value="beige">Beige</option>
-          <option value="coral">Coral</option>
-          <option value="turquoise">Turquoise</option>
-          <option value="violet">Violet</option>
-          <option value="indigo">Indigo</option>
-        </select>
+/>
         <label htmlFor="border-color">Border color:</label>
         {/* Added value and onChange handler */}
-        <select name="color" id="border-color" value={borderColor} onChange={(e) => setBorderColor(e.target.value)}>
-          <option value="">Select a color</option>
-          <option value="red">Red</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-          <option value="yellow">Yellow</option>
-          <option value="orange">Orange</option>
-          <option value="purple">Purple</option>
-          <option value="pink">Pink</option>
-          <option value="brown">Brown</option>
-          <option value="black">Black</option>
-          <option value="white">White</option>
-          <option value="gray">Gray</option>
-          <option value="cyan">Cyan</option>
-          <option value="magenta">Magenta</option>
-          <option value="lime">Lime</option>
-          <option value="teal">Teal</option>
-          <option value="navy">Navy</option>
-          <option value="maroon">Maroon</option>
-          <option value="olive">Olive</option>
-          <option value="silver">Silver</option>
-          <option value="gold">Gold</option>
-          <option value="beige">Beige</option>
-          <option value="coral">Coral</option>
-          <option value="turquoise">Turquoise</option>
-          <option value="violet">Violet</option>
-          <option value="indigo">Indigo</option>
-        </select>
+        <input type='color' id="border-color" value={borderColor} onChange={(e) => setBorderColor(e.target.value)}/>
 
         <label htmlFor="header-height">Header height(in px):</label>
         {/* Added value and onChange handler */}
