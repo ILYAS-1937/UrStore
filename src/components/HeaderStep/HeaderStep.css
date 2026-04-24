@@ -1,0 +1,168 @@
+/* On cible uniquement le conteneur interne et ses enfants */
+.header-step{
+    margin-top: 10px;
+}
+.header-step h1{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #2d3748;
+    padding: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+.header-step span{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #3261b2;
+    padding: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #ffffff; /* Couleur de fond */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Ombre légère */
+    border-radius: 8px; /* Optionnel : pour un look "card" moderne */
+    font-family: sans-serif;
+}
+
+/* Redimensionnement du logo */
+.header-container img {
+    height: 100px;
+    width: auto;
+    display: block;
+}
+
+/* Alignement des liens */
+.header-container ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+/* Style des liens */
+.header-container ul li a {
+    text-decoration: none;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Interaction au survol */
+.header-container ul li a:hover {
+    color: #ff4757; /* Couleur d'accentuation */
+    transform: translateY(-2px);
+    display: inline-block;
+}
+
+/* Responsive : passage en colonne sur mobile */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+/* Container/Body Setup (Optional but recommended for the look) */
+
+/* The Modern Form Card */
+.header-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+/* Heading Style */
+.header-form h1 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  color: #2d3748;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Labels */
+.header-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: -5px;
+}
+
+/* Inputs & Selects */
+.header-form input[type="file"],
+.header-form input[type="number"],
+.header-form select {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  outline: none;
+  color: #2d3748;
+}
+
+/* Hover & Focus States */
+.header-form input:focus,
+.header-form select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* File Input Specific Styling */
+.header-form input[type="file"]::file-selector-button {
+  background: #edf2f7;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.header-form input[type="file"]::file-selector-button:hover {
+  background: #e2e8f0;
+}
+
+/* The Submit Button */
+.header-form button[type="submit"] {
+  margin-top: 10px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+}
+
+.header-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+}
+
+.header-form button[type="submit"]:active {
+  transform: translateY(0);
+}

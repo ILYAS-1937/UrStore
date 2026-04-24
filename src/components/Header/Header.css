@@ -1,0 +1,105 @@
+/* --- Modern Color Variables --- */
+:root {
+  --primary-color: #4f46e5; /* Modern Indigo */
+  --primary-hover: #4338ca;
+  --text-main: #1f2937; /* Dark Gray */
+  --text-muted: #4b5563;
+  --bg-color: #ffffff;
+  --border-color: #f3f4f6;
+}
+
+/* --- Base Header Layout --- */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position: sticky; 
+  top: 0;
+  z-index: 1000;
+  
+  /* We removed space-between and added a gap instead */
+  gap: 2.5rem; 
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  
+  /* THIS IS THE MAGIC TRICK: 
+     It pushes all the other items to the right */
+  margin-right: auto; 
+}
+
+/* --- Navigation Links --- */
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* --- Call to Action Button --- */
+.cta-button {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px; /* Modern rounded corners */
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1), 0 2px 4px -1px rgba(79, 70, 229, 0.06);
+}
+
+.cta-button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px); /* Slight lift effect */
+  box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.2);
+}
+
+.cta-button:active {
+  transform: translateY(0); /* Pushes down when clicked */
+}
+
+/* --- Mobile Responsiveness --- */
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 1.5rem 5%;
+    gap: 1.5rem;
+  }
+
+  .logo {
+    margin-right: 0; /* Resets the magic trick so it centers on mobile */
+  }
+
+  .nav-links ul {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cta-button {
+    width: 100%;
+    padding: 0.8rem;
+  }
+}

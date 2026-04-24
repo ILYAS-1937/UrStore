@@ -1,0 +1,318 @@
+:root {
+  --primary-color: #6366f1; /* Modern Indigo */
+  --primary-hover: #4f46e5;
+  --text-main: #1f2937;
+  --text-muted: #4b5563;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+}
+.hero-step{
+    display: flex;
+}
+.all h1{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #2d3748;
+    padding: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+.all span{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #3261b2;
+    padding: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 8%; /* Increased vertical padding often looks better with auto height */
+  min-height: auto;  /* This overrides the 85vh */
+  background: 
+    radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.15) 0%, transparent 50%),
+    #ffffff;
+  gap: 60px;
+  overflow: hidden;
+  align-self: flex-start;
+  border-radius: 10px;
+  margin-top: 100px;
+}
+/* --- Text Content Styling --- */
+.hero-paragraphe {
+  flex: 1.2;
+  max-width: 650px;
+  z-index: 2;
+  animation: slideUp 0.8s ease-out;
+}
+
+.hero-paragraphe h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  color: var(--text-main);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+
+.hero-paragraphe h2 {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.hero-paragraphe p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 35px;
+}
+
+/* --- The CTA Button --- */
+.hero-button {
+  padding: 16px 36px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.hero-button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+}
+
+/* --- Image Section with Floating Effect --- */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 30px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  /* Optional: gives that "app" look */
+  border: 8px solid white;
+}
+
+/* --- Animations --- */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 1024px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 5%;
+    justify-content: center;
+  }
+
+  .hero-paragraphe {
+    max-width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 90%;
+  }
+}
+/* On cible uniquement le conteneur interne et ses enfants */
+.header-step{
+    margin-top: 10px;
+}
+.header-step h1{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #2d3748;
+    padding: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+.header-step span{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #3261b2;
+    padding: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #ffffff; /* Couleur de fond */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Ombre légère */
+    border-radius: 8px; /* Optionnel : pour un look "card" moderne */
+    font-family: sans-serif;
+}
+
+/* Redimensionnement du logo */
+.header-container img {
+    height: 100px;
+    width: auto;
+    display: block;
+}
+
+/* Alignement des liens */
+.header-container ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+/* Style des liens */
+.header-container ul li a {
+    text-decoration: none;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Interaction au survol */
+.header-container ul li a:hover {
+    color: #ff4757; /* Couleur d'accentuation */
+    transform: translateY(-2px);
+    display: inline-block;
+}
+
+/* Responsive : passage en colonne sur mobile */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+/* Container/Body Setup (Optional but recommended for the look) */
+
+/* The Modern Form Card */
+.hero-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+/* Heading Style */
+.hero-form h1 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  color: #2d3748;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Labels */
+.hero-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: -5px;
+}
+
+/* Inputs & Selects */
+.hero-form input[type="file"],
+.hero-form input[type="number"],
+.hero-form select {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  outline: none;
+  color: #2d3748;
+}
+
+/* Hover & Focus States */
+.hero-form input:focus,
+.hero-form select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* File Input Specific Styling */
+.hero-form input[type="file"]::file-selector-button {
+  background: #edf2f7;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.hero-form input[type="file"]::file-selector-button:hover {
+  background: #e2e8f0;
+}
+
+/* The Submit Button */
+.hero-form button[type="submit"] {
+  margin-top: 10px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+}
+
+.hero-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+}
+
+.hero-form button[type="submit"]:active {
+  transform: translateY(0);
+}

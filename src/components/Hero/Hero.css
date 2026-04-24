@@ -1,0 +1,130 @@
+:root {
+  --primary-color: #6366f1; /* Modern Indigo */
+  --primary-hover: #4f46e5;
+  --text-main: #1f2937;
+  --text-muted: #4b5563;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 8%;
+  min-height: 85vh;
+  background: 
+    radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.15) 0%, transparent 50%),
+    #ffffff;
+  gap: 60px;
+  overflow: hidden;
+}
+
+/* --- Text Content Styling --- */
+.heroParagraphe {
+  flex: 1.2;
+  max-width: 650px;
+  z-index: 2;
+  animation: slideUp 0.8s ease-out;
+}
+
+.heroParagraphe h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  color: var(--text-main);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+
+.heroParagraphe h2 {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.heroParagraphe p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 35px;
+}
+
+/* --- The CTA Button --- */
+.cta-button {
+  padding: 16px 36px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.cta-button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+}
+
+/* --- Image Section with Floating Effect --- */
+.heroImage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  animation: float 5s ease-in-out infinite;
+}
+
+.heroImage img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 30px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  /* Optional: gives that "app" look */
+  border: 8px solid white;
+}
+
+/* --- Animations --- */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 5%;
+    justify-content: center;
+  }
+
+  .heroParagraphe {
+    max-width: 100%;
+  }
+
+  .heroImage img {
+    max-width: 90%;
+  }
+}
