@@ -45,7 +45,7 @@ function FooterStep() {
         <div className="footer-form-container">
           <form className="footer-form" onSubmit={(e) => e.preventDefault()}>
             
-            <label>Brand Name:</label>
+            <label>Brand Name:</label><br />
             <input 
               type="text" 
               className="hero-input-custom" 
@@ -53,7 +53,7 @@ function FooterStep() {
               onChange={(e) => setBrandName(e.target.value)} 
             />
 
-            <label>Brand Description:</label>
+            <label>Brand Description:</label><br />
             <textarea 
               className="hero-input-custom" 
               value={brandDesc} 
@@ -85,7 +85,7 @@ function FooterStep() {
               onChange={(e) => setFooterTextColor(e.target.value)} 
             />
 
-            <label>Copyright Text:</label>
+            <label>Copyright Text:</label> <br />
             <input 
               type="text" 
               className="hero-input-custom" 
