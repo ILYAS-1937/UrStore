@@ -21,7 +21,7 @@ function HeroStep() {
   const [descColor, setDescColor] = useState("");
   const [btnColor, setBtnColor] = useState("");
   const [btnTextColor, setBtnTextColor] = useState("");
-  const [heroTitle, setHeroTitle] = useState("Your hero title.");
+  const [heroTitle, setHeroTitle] = useState("Your hero");
   const [heroSubtitle, setHeroSubtitle] = useState("Your hero subtitle");
   const [heroDescription, setHeroDescription] = useState("your hero description.");
   // --- 2. Handlers ---
@@ -35,7 +35,7 @@ function HeroStep() {
 
   return (
     <div className="all">
-    <h1><span>Step1:</span> Customize Your Store Hero</h1>
+    <h1 className="heroTitle"><span>Step2:</span> Customize Your Store Hero</h1>
     <div className="hero-step">
       <div 
         className="hero-container"
@@ -85,6 +85,7 @@ function HeroStep() {
         />
         <label htmlFor="hero-title">type your store hero title:</label>
         <input 
+          className="hero-input-custom"
           type="text" 
           id="hero-title" 
           value={heroTitle} 
@@ -93,6 +94,7 @@ function HeroStep() {
 
         <label htmlFor="hero-subtitle">type your store hero subtitle:</label>
         <input 
+        className="hero-input-custom"
           type="text" 
           id="hero-subtitle" 
           value={heroSubtitle} 
@@ -100,11 +102,14 @@ function HeroStep() {
         />
 
         <label htmlFor="hero-paragraph">type your store hero description:</label>
-        <textarea
-          id="hero-paragraph" 
-          value={heroDescription} 
-          onChange={(e) => setHeroDescription(e.target.value)} 
-        />
+<textarea
+className="hero-input-custom"
+  id="hero-paragraph" 
+  value={heroDescription} 
+  onChange={(e) => setHeroDescription(e.target.value)} 
+  rows={4} // Ajoute de la hauteur visible pour les longs textes
+  style={{ resize: "vertical" }} // Permet à l'utilisateur d'agrandir la zone
+/>
         <label htmlFor="title-text-style">Title text style:</label>
         <select value={titleFont} onChange={(e) => setTitleFont(e.target.value)}>
           <option value="">Select Font Family</option>

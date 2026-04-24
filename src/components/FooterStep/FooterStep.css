@@ -1,0 +1,146 @@
+.footer-step-page {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.step-main-title{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #2d3748;
+    padding: 5px;
+    font-weight: 700;
+    text-align: center;
+    font-size: 40px;
+}
+.step-main-title span{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #3261b2;
+    padding: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+
+
+.footer-step-container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* --- Section Aperçu --- */
+.footer-preview-section {
+  flex: 1.5;
+  background: #f8fafc;
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dynamic-footer {
+  width: 100%;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.footer-content-preview {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.footer-brand-preview h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.footer-links-preview ul {
+  list-style: none;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.footer-bottom-preview {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+/* --- Section Formulaire --- */
+.footer-form-container {
+  flex: 1;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.footer-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-picker-custom {
+  width: 100%;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+  background: none;
+}
+
+.submit-btn-footer {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3261b2 0%, #1e3a8a 100%);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.submit-btn-footer:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   RESPONSIVE MOBILE (Écrans < 900px)
+   ========================================= */
+@media (max-width: 900px) {
+  /* 1. On force le conteneur principal à s'empiler verticalement */
+  .footer-step-container {
+    display: flex !important;
+    flex-direction: column !important; /* Le secret est ici : on passe de ligne à colonne */
+    align-items: center;
+    width: 100%;
+    gap: 2.5rem; /* Espace de respiration entre le design et le formulaire */
+    overflow-x: hidden; /* Empêche tout débordement horizontal sur l'écran */
+  }
+
+  /* 2. On s'assure que la prévisualisation prend toute la largeur dispo */
+  .footer-preview-section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center; /* Centre le faux footer dans son espace */
+  }
+
+  /* 3. On s'assure que le formulaire prend toute la largeur dispo */
+  .footer-form-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem; /* Un petit espace sur les côtés pour que les inputs ne touchent pas le bord du téléphone */
+  }
+}
