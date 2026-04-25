@@ -8,8 +8,9 @@ import HeaderStep from './components/HeaderStep/HeaderStep'
 import HeroStep from './components/HeroStep/HeroStep'
 import StoreStep from './components/StoreStep/StoreStep'
 import FooterStep from './components/FooterStep/FooterStep'
+import ContactStep from './components/ContactStep/ConatctStep'
 import FinalPreview from './components/finalPreview/FinalPreview'
-import ContactStep from './components/ContactStep/ConatctStep'  
+
 function App() {
   return (
    <Routes>
