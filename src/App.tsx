@@ -8,7 +8,7 @@ import HeaderStep from './components/HeaderStep/HeaderStep'
 import HeroStep from './components/HeroStep/HeroStep'
 import StoreStep from './components/StoreStep/StoreStep'
 import FooterStep from './components/FooterStep/FooterStep'
-import FinalPreview from './components/FinalPreview/FinalPreview'
+import FinalPreview from './components/finalPreview/FinalPreview'
 function App() {
   return (
    <Routes>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useStore from "../../useStore";
 
 function FooterStep() {
-   const data = useStore((state) => state.data);
+  const setField = useStore((state) => state.setField);
   const [footerBgColor, setFooterBgColor] = useState("#ffffff");
   const [footerTextColor, setFooterTextColor] = useState("#4b5563");
   const [footerTitleColor, setFooterTitleColor] = useState("#1f2937");
