@@ -2,6 +2,8 @@ import headImg from "../../images/headerTuto.png"
 import heroImg from "../../images/heroTuto.jpg"
 import storeImg from "../../images/storeTuto.png"
 import footerImg from "../../images/footerTuto.jpg"
+import contactImg from "../../images/conatactImg.png"
+import getStoreImg from "../../images/getStoreImg.png"
 import "./StepsTuto.css";
 function StepsTuto() {
   return (
@@ -24,9 +26,19 @@ function StepsTuto() {
           <img src={storeImg} alt="Store Tutorial" />
         </div>
         <div className="step">
-          <h3><span>Step 4:</span> Wrap It Up (The Footer)</h3>
+          <h3><span>Step 4:</span> Enable Customer Connection (Contact Section)</h3>
+          <p>Add your contact information,such as Whatsapp,Instagram,and Email.</p>
+          <img src={contactImg} alt="Contact Tutorial" />
+        </div>
+        <div className="step">
+          <h3><span>Step 5:</span> Wrap It Up (The Footer)</h3>
           <p>Add your contact information, social media links, and essential pages link.</p>
           <img src={footerImg} alt="Footer Tutorial" />
+        </div>
+        <div className="step">
+          <h3><span>Step 6:</span> Get your Store</h3>
+          <p>Download your completed store’s source code (HTML, CSS, and images).</p>
+          <img src={getStoreImg} alt="Get Store Tutorial" />
         </div>
       </div>
     </div>

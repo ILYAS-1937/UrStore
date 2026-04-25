@@ -117,14 +117,47 @@ function FinalPreview() {
       .hero-button { padding: 16px 36px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; }
       .hero-image { flex: 1; display: flex; justify-content: center; max-width: 100%; }
       .hero-image img { max-width: 100%; object-fit: cover; }
-      
-      .store-section { padding: 80px 5%; background-color: #ffffff; width: 100%; }
+      .heroTitle{
+    margin-top: 10px;
+    font-size: 50px;
+    color: #2d3748;
+    padding: 5px;
+    font-weight: 700;
+    text-align: center;
+}
+      .store-section { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  color: #0f172a; }
       .store-title { text-align: center; font-size: 2.5rem; color: #1e293b; margin: 0 0 50px 0; font-family: sans-serif; }
-      .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
-      .product-card { border: 1px solid #f1f5f9; border-radius: 20px; overflow: hidden; text-align: center; background: #fff; }
-      .product-image-container img { width: 100%; height: 220px; object-fit: contain; }
-      
-      .preview-buttons { padding: 40px 5%; display: flex; justify-content: center; gap: 15px; background: #f8fafc; }
+      .products-grid { margin: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
+      .product-card {  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer; }
+      .product-image-container {
+  width: 100%;
+  height: 220px;
+  background-color: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #f8fafc;
+}
+      .product-image-container img {max-width: 100%;
+  max-height: 100%;
+  /* This ensures the image is fully visible and never cut off */
+  object-fit: contain; 
+  transition: transform 0.4s ease; }
+      .product-card:hover .product-image-container img {transform: scale(1.08)}
+      .product-card:hover { transform: translateY(-6px);box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04)}
+      .preview-buttons { padding: 40px 5%; display: flex; justify-content: center; gap: 15px;  }
       .contact-btn { padding: 12px 25px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer; text-decoration: none; }
       .whatsapp-btn { background-color: #25D366; }
       .instagram-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743); }
@@ -140,25 +173,27 @@ function FinalPreview() {
         ${headerPath ? `<img src="${headerPath}" alt="Logo" style="height: ${headerLogoWidth}px;">` : `<h2>${storeName}</h2>`}
         <ul>
             <li><a href="#" style="color: ${navLinkColor};">Home</a></li>
-            <li><a href="#" style="color: ${navLinkColor};">About</a></li>
-            <li><a href="#" style="color: ${navLinkColor};">Store</a></li>
-            <li><a href="#" style="color: ${navLinkColor};">Contact</a></li>
+            <li><a href="#about" style="color: ${navLinkColor};">About</a></li>
+            <li><a href="#store" style="color: ${navLinkColor};">Store</a></li>
+            <li><a href="#contact" style="color: ${navLinkColor};">Contact</a></li>
         </ul>
     </div>
 
-    <div class="hero-container" style="background: ${finalHeroBg};">
+    <div id="about" class="hero-container" style="background: ${finalHeroBg};">
         <div class="hero-paragraphe">
             <h1 style="font-family: ${titleFont}; color: ${heroTitleColor};">${heroTitle}</h1>
             <h2 style="font-family: ${subtitleFont}; color: ${subheroTitleColor};">${heroSubtitle}</h2>
             <p style="font-family: ${paragraphFont}; color: ${descColor};">${heroDescription}</p>
-            <button class="hero-button" style="background-color: ${heroBtnColor}; color: ${heroBtnTextColor};">View Menu Now</button>
+            <a href="#store">
+                <button class="hero-button" style="background-color: ${heroBtnColor}; color: ${heroBtnTextColor};">View Menu Now</button>
+            </a>
         </div>
         <div class="hero-image">
             ${heroPath ? `<img src="${heroPath}" alt="Hero Image" style="width: ${heroImgWidth}%;">` : ''}
         </div>
     </div>
 
-    <div class="store-section">
+    <div id="store" class="store-section">
         <h2 class="store-title">Nos Produits</h2>
         <div class="products-grid">
             ${processedProducts.map(p => `
@@ -172,14 +207,15 @@ function FinalPreview() {
             `).join('')}
         </div>
     </div>
-
+    <div style="background: #f8fafc;">
+<h1 class="heroTitle">Order your products now!</h1>
     ${(whatsapp || instagram || email) ? `
-    <div class="preview-buttons">
-        ${whatsapp ? `<button class="contact-btn whatsapp-btn">Contact via WhatsApp</button>` : ''}
-        ${instagram ? `<button class="contact-btn instagram-btn">Follow on Instagram</button>` : ''}
-        ${email ? `<button class="contact-btn email-btn">Send an Email</button>` : ''}
+    <div id="contact" class="preview-buttons">
+        ${whatsapp ? `<a href="https://wa.me/${whatsapp}" target="_blank"><button class="contact-btn whatsapp-btn">Contact via WhatsApp</button></a>` : ''}
+        ${instagram ? `<a href="https://instagram.com/${instagram}" target="_blank"><button class="contact-btn instagram-btn">Follow on Instagram</button></a>` : ''}
+        ${email ? `<a href="mailto:${email}" target="_blank"><button class="contact-btn email-btn">Send an Email</button></a>` : ''}
     </div>` : ''}
-
+</div>
     <footer class="dynamic-footer-preview" style="background: ${footerBgColor}; color: ${footerTextColor}; border-top: 1px solid ${footerTextColor}22;">
         <div class="footer-main-content">
             <div class="footer-brand-side">
@@ -288,7 +324,7 @@ function FinalPreview() {
           background: finalHeroBg, /* <-- ICI EST LA MAGIE DU DÉGRADÉ */
           width: "100%",          
           boxSizing: "border-box",
-          overflow: "hidden"      
+          overflow: "hidden",    
         }}>
           <div className="hero-paragraphe">
             <h1 style={{ fontFamily: titleFont, color: heroTitleColor, margin: "0 0 20px 0" }}>{heroTitle}</h1>
@@ -322,14 +358,18 @@ function FinalPreview() {
         </div>
 
         {/* CONTACT EXACT */}
+        <div style={{ background: "#f8fafc" }}>
+       <h1 className="heroTitle">Order your products now!</h1>
         {(whatsapp || instagram || email) && (
           <div className="preview-buttons" style={{ padding: "40px 5%", display: "flex", justifyContent: "center", gap: "15px", flexDirection: "row", backgroundColor: "#f8fafc", boxSizing: "border-box", width: "100%" }}>
+             
             {whatsapp && <button className="contact-btn whatsapp-btn">Contact via WhatsApp</button>}
             {instagram && <button className="contact-btn instagram-btn">Follow on Instagram</button>}
             {email && <button className="contact-btn email-btn">Send an Email</button>}
           </div>
+          
         )}
-
+</div>
         {/* FOOTER EXACT */}
         <footer className="dynamic-footer-preview" style={{ 
           background: footerBgColor, 
