@@ -8,6 +8,7 @@ import HeaderStep from './components/HeaderStep/HeaderStep'
 import HeroStep from './components/HeroStep/HeroStep'
 import StoreStep from './components/StoreStep/StoreStep'
 import FooterStep from './components/FooterStep/FooterStep'
+import FinalPreview from './components/FinalPreview/FinalPreview'
 function App() {
   return (
    <Routes>
@@ -24,6 +25,7 @@ function App() {
   <Route path="hero-step" element={<><HeroStep /></>} />
   <Route path="store-step" element={<StoreStep/>}/>
   <Route path="footer-step" element={<FooterStep/>}/>
+  <Route path="final-preview" element={<FinalPreview/>}/>
    </Routes>
   )
 }

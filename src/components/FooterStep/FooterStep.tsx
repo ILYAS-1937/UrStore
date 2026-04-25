@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FooterStep.css";
 import { Link } from "react-router-dom";
+import useStore from "../../useStore";
 
 function FooterStep() {
-  // --- État pour la personnalisation du Footer ---
+   const data = useStore((state) => state.data);
   const [footerBgColor, setFooterBgColor] = useState("#ffffff");
   const [footerTextColor, setFooterTextColor] = useState("#4b5563");
   const [footerTitleColor, setFooterTitleColor] = useState("#1f2937");
@@ -11,6 +12,25 @@ function FooterStep() {
   const [brandDesc, setBrandDesc] = useState("Build your dream store with zero code.");
   const [copyrightText, setCopyrightText] = useState("All rights reserved.");
 
+
+   useEffect(() => {
+    setField("footerBgColor", footerBgColor);
+  }, [footerBgColor]);
+    useEffect(() => {
+    setField("footerTextColor", footerTextColor);
+  }, [footerTextColor]);
+    useEffect(() => {
+    setField("footerTitleColor", footerTitleColor);
+  }, [footerTitleColor]);
+    useEffect(() => {
+    setField("brandName", brandName);
+  }, [brandName]);
+    useEffect(() => {
+    setField("brandDesc", brandDesc);
+  }, [brandDesc]);
+    useEffect(() => {
+    setField("copyrightText", copyrightText);
+  }, [copyrightText]);
   return (
     <div className="footer-step-page">
             <h1 className="step-main-title"><span>Step4:</span> Customize Your Store Footer</h1>

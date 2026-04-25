@@ -1,6 +1,7 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useEffect, use } from 'react';
 import { Link } from 'react-router-dom';
 import './StoreStep.css';
+import useStore from '../../useStore';
 
 interface Product {
   id: string;
@@ -10,13 +11,12 @@ interface Product {
 }
 
 export default function StoreStep() {
+  const setField = useStore((state) => state.setField);
   const [products, setProducts] = useState<Product[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
   const [name, setName] = useState('');
   const [price, setPrice] = useState<number | ''>('');
   const [imagePreview, setImagePreview] = useState<string>('');
-
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -24,11 +24,9 @@ export default function StoreStep() {
       setImagePreview(previewUrl);
     }
   };
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!name || price === '' || !imagePreview) return;
-
     const newProduct: Product = {
       id: Date.now().toString(),
       name,
@@ -39,13 +37,29 @@ export default function StoreStep() {
     setProducts([...products, newProduct]);
     closeModal();
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
     setName('');
     setPrice('');
     setImagePreview('');
   };
+  useEffect(() => {
+    setField("products", products);
+  }, [products]);
+  useEffect(() => {
+    setField("isModalOpen", isModalOpen);
+  }, [isModalOpen]);
+    useEffect(() => {
+    setField("name", name);
+  }, [name]);
+    useEffect(() => {
+    setField("price", price);
+  }, [price]);
+    useEffect(() => {
+    setField("imagePreview", imagePreview);
+  }, [imagePreview]);
+
+
 
   return (
     <div className="store-step-container">
