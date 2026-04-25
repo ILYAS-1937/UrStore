@@ -171,7 +171,7 @@ export default function StoreStep() {
           </div>
         </div>
       )}
-      <Link to="/footer-step"><center><button className='save-store-btn' type="submit">Save store</button></center></Link>
+      <Link to="/contact-step"><center><button className='save-store-btn' type="submit">Save store</button></center></Link>
     </div>
   );
 }
