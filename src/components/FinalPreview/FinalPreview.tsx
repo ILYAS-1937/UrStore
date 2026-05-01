@@ -56,6 +56,9 @@ function FinalPreview() {
   const whatsapp = data.whatsapp || "";
   const instagram = data.instagram || "";
   const email = data.email || "";
+  
+  // --- NOUVELLE VARIABLE: Background de la section contact ---
+  const contactBgColor = data.contactBgColor || "#f8fafc";
 
   // --- LE SECRET POUR LE DÉGRADÉ PAR DÉFAUT ---
   const defaultHeroGradient = `radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.15) 0%, transparent 50%), #ffffff`;
@@ -101,6 +104,7 @@ function FinalPreview() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="512x512" href="${headerPath}" /> 
     <title>${storeName}</title>
     <style>
       body { margin: 0; padding: 0; font-family: sans-serif; background-color: #f8fafc; }
@@ -160,7 +164,6 @@ function FinalPreview() {
 }
       .product-image-container img {max-width: 100%;
   max-height: 100%;
-  /* This ensures the image is fully visible and never cut off */
   object-fit: contain; 
   transition: transform 0.4s ease; }
       .product-card:hover .product-image-container img {transform: scale(1.08)}
@@ -171,9 +174,15 @@ function FinalPreview() {
       .instagram-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743); }
       .email-btn { background-color: #ea4335; }
 
-      .dynamic-footer-preview { padding: 40px 8% 20px; display: flex; flex-direction: column; width: 100%; }
-      .footer-main-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+      /* --- FOOTER RENDU COMPACT ET ALIGNÉ --- */
+      .dynamic-footer-preview { padding: 20px 5% 15px; display: flex; flex-direction: column; width: 100%; }
+      .footer-main-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; width: 100%; }
+      .footer-brand-side { max-width: 350px; }
+      /* L'astuce est ici : max-height sur l'image pour éviter l'étirement du carré */
+      .footer-brand-side img { max-width: 100%; max-height: 70px; object-fit: contain; }
+      .footer-right-side { max-width: 300px; }
       .guarantees-list { list-style: none; padding: 0; }
+      .footer-copyright-bar { width: 100%; margin-top: 20px; padding-top: 15px; text-align: center; border-top-width: 1px; border-top-style: solid; }
     </style>
 </head>
 <body>
@@ -219,32 +228,32 @@ function FinalPreview() {
             `).join('')}
         </div></center>
     </div>
-    <div style="background: #f8fafc;">
+    <div style="background: ${contactBgColor};">
 <h1 class="heroTitle">Order your products now!</h1>
     ${(whatsapp || instagram || email) ? `
     <div id="contact" class="preview-buttons">
-        ${whatsapp ? `<a href="https://wa.me/${whatsapp}" target="_blank"><button class="contact-btn whatsapp-btn">Contact via WhatsApp</button></a>` : ''}
-        ${instagram ? `<a href="https://instagram.com/${instagram}" target="_blank"><button class="contact-btn instagram-btn">Follow on Instagram</button></a>` : ''}
+        ${whatsapp ? `<a href="https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}" target="_blank"><button class="contact-btn whatsapp-btn">Contact via WhatsApp</button></a>` : ''}
+        ${instagram ? `<a href="https://instagram.com/${instagram.replace('@', '')}" target="_blank"><button class="contact-btn instagram-btn">Follow on Instagram</button></a>` : ''}
         ${email ? `<a href="mailto:${email}" target="_blank"><button class="contact-btn email-btn">Send an Email</button></a>` : ''}
     </div>` : ''}
 </div>
     <footer class="dynamic-footer-preview" style="background: ${footerBgColor}; color: ${footerTextColor}; border-top: 1px solid ${footerTextColor}22;">
         <div class="footer-main-content">
             <div class="footer-brand-side">
-                ${footerPath ? `<img src="${footerPath}" style="width: ${footerLogoWidth}px;">` : ''}
-                <p class="footer-desc-text" style="color: ${footerTextColor}; margin-top: 15px;">${footerDescription}</p>
+                ${footerPath ? `<img src="${footerPath}" style="width: ${footerLogoWidth}px; max-height: 70px; object-fit: contain;">` : ''}
+                <p class="footer-desc-text" style="color: ${footerTextColor}; margin-top: 10px; margin-bottom: 0; line-height: 1.4;">${footerDescription}</p>
             </div>
             <div class="footer-right-side">
-                <h4 style="color: ${footerTextColor}; margin: 0 0 15px 0;">${guaranteeTitle}</h4>
-                <ul class="guarantees-list" style="margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                <h4 style="color: ${footerTextColor}; margin: 0 0 10px 0;">${guaranteeTitle}</h4>
+                <ul class="guarantees-list" style="margin: 0; display: flex; flex-direction: column; gap: 5px;">
                     <li style="color: ${footerTextColor};">${guarantee1}</li>
                     <li style="color: ${footerTextColor};">${guarantee2}</li>
                     <li style="color: ${footerTextColor};">${guarantee3}</li>
                 </ul>
             </div>
         </div>
-        <div class="footer-copyright-bar" style="border-top-color: ${footerTextColor}22; text-align: center; margin-top: 40px; padding-top: 20px;">
-            <p>&copy; ${new Date().getFullYear()} ${storeName}. All rights reserved.</p>
+        <div class="footer-copyright-bar" style="border-top-color: ${footerTextColor}22; text-align: center; margin-top: 20px; padding-top: 15px;">
+            <p style="margin: 0;">&copy; ${new Date().getFullYear()} ${storeName}. All rights reserved.</p>
         </div>
     </footer>
 </body>
@@ -375,10 +384,10 @@ function FinalPreview() {
         </div>
 
         {/* CONTACT EXACT */}
-        <div style={{ background: "#f8fafc" }}>
-       <h1 className="heroTitle">Order your products now!</h1>
+        <div style={{ background: contactBgColor }}>
+       <h1 className="heroTitle" style={{ margin: 0, paddingTop: "40px" }}>Order your products now!</h1>
         {(whatsapp || instagram || email) && (
-          <div className="preview-buttons" style={{ padding: "40px 5%", display: "flex", justifyContent: "center", gap: "15px", flexDirection: "row", backgroundColor: "#f8fafc", boxSizing: "border-box", width: "100%" }}>
+          <div className="preview-buttons" style={{ padding: "40px 5%", display: "flex", justifyContent: "center", gap: "15px", flexDirection: "row", backgroundColor: contactBgColor, boxSizing: "border-box", width: "100%" }}>
              
             {whatsapp && <button className="contact-btn whatsapp-btn">Contact via WhatsApp</button>}
             {instagram && <button className="contact-btn instagram-btn">Follow on Instagram</button>}
@@ -387,34 +396,34 @@ function FinalPreview() {
           
         )}
 </div>
-        {/* FOOTER EXACT */}
+        {/* FOOTER EXACT : Rendu très compact (Même padding et disposition que dans le HTML) */}
         <footer className="dynamic-footer-preview" style={{ 
           background: footerBgColor, 
           color: footerTextColor, 
           borderTop: `1px solid ${footerTextColor}22`,
-          padding: "40px 5% 20px",
+          padding: "20px 5% 15px",
           boxSizing: "border-box",
           width: "100%"
         }}>
-          <div className="footer-main-content">
-            <div className="footer-brand-side">
+          <div className="footer-main-content" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "20px", width: "100%" }}>
+            <div className="footer-brand-side" style={{ maxWidth: "350px" }}>
               <div className="footer-logo-wrapper">
-                {data.footerLogo && <img src={data.footerLogo} alt="Logo" style={{ width: `${footerLogoWidth}px`, objectFit: 'contain' }} />}
+                {data.footerLogo && <img src={data.footerLogo} alt="Logo" style={{ width: `${footerLogoWidth}px`, maxHeight: "70px", maxWidth: "100%", objectFit: 'contain' }} />}
               </div>
-              <p className="footer-desc-text" style={{ color: footerTextColor, margin: "15px 0 0 0" }}>{footerDescription}</p>
+              <p className="footer-desc-text" style={{ color: footerTextColor, margin: "10px 0 0 0", lineHeight: 1.4 }}>{footerDescription}</p>
             </div>
             
-            <div className="footer-right-side">
-              <h4 style={{ color: footerTextColor, margin: "0 0 15px 0" }}>{guaranteeTitle}</h4>
-              <ul className="guarantees-list" style={{ margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
+            <div className="footer-right-side" style={{ maxWidth: "300px" }}>
+              <h4 style={{ color: footerTextColor, margin: "0 0 10px 0" }}>{guaranteeTitle}</h4>
+              <ul className="guarantees-list" style={{ margin: 0, display: "flex", flexDirection: "column", gap: "5px", padding: 0, listStyle: "none" }}>
                 <li style={{ color: footerTextColor }}>{guarantee1}</li>
                 <li style={{ color: footerTextColor }}>{guarantee2}</li>
                 <li style={{ color: footerTextColor }}>{guarantee3}</li>
               </ul>
             </div>
           </div>
-          <div className="footer-copyright-bar" style={{ borderTopColor: `${footerTextColor}22`, textAlign: "center", marginTop: "40px", paddingTop: "20px" }}>
-            <p>&copy; {new Date().getFullYear()} {storeName}. All rights reserved.</p>
+          <div className="footer-copyright-bar" style={{ borderTopColor: `${footerTextColor}22`, borderTopWidth: "1px", borderTopStyle: "solid", width: "100%", textAlign: "center", margin: "20px auto 0", paddingTop: "15px" }}>
+            <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} {storeName}. All rights reserved.</p>
           </div>
         </footer>
 

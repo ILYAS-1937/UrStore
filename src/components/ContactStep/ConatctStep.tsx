@@ -11,23 +11,25 @@ import gmailImg from "../../images/gmail.png";
 function ContactStep() {
   const setField = useStore((state) => state.setField);
 
-  // State for contact details
+  // State for contact details & background color
   const [whatsapp, setWhatsapp] = useState('');
   const [instagram, setInstagram] = useState('');
   const [email, setEmail] = useState('');
+  const [contactBgColor, setContactBgColor] = useState('#f8fafc'); // Ajout du background par défaut
 
   // Sync with global store
   useEffect(() => { setField("whatsapp", whatsapp); }, [whatsapp, setField]);
   useEffect(() => { setField("instagram", instagram); }, [instagram, setField]);
   useEffect(() => { setField("email", email); }, [email, setField]);
+  useEffect(() => { setField("contactBgColor", contactBgColor); }, [contactBgColor, setField]); // Sync de la couleur
 
   return (
     <div className="contact-step-wrapper">
       <h1 className="heroTitle"><span>Step4:</span> Set Up Contact Methods</h1>
       
       <div className="contact-container">
-        {/* Live Preview Section */}
-        <div className="contact-preview"> 
+        {/* Live Preview Section - Le background change en direct */}
+        <div className="contact-preview" style={{ backgroundColor: contactBgColor }}> 
           <div className="preview-content">
             <h2 className="order-prompt">Order your products now!</h2>
             <p>Choose a platform to contact us:</p>
@@ -60,6 +62,19 @@ function ContactStep() {
 
         {/* Form Section */}
         <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+          
+          {/* Nouveau champ pour la couleur de fond */}
+          <div className="form-group">
+            <label htmlFor="contactBgColor">Background Color</label>
+            <input 
+              type="color" 
+              id="contactBgColor" 
+              value={contactBgColor}
+              onChange={(e) => setContactBgColor(e.target.value)}
+              style={{ height: '45px', padding: '2px', cursor: 'pointer', width: '100%' }}
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="whatsapp">WhatsApp Number</label>
             <input 
