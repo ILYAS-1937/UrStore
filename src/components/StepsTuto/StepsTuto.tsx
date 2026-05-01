@@ -8,7 +8,7 @@ import "./StepsTuto.css";
 function StepsTuto() {
   return (
     <div className="steps-tuto">
-      <h2>How to Launch Your Store in 4 Simple Steps</h2>
+      <h2>How to Launch Your Store in 6 Simple Steps</h2>
       <div className="steps">
         <div className="step">
           <h3><span>Step 1:</span> Define Your Identity (The Header)</h3>

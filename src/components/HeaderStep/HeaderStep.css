@@ -1,6 +1,7 @@
 /* On cible uniquement le conteneur interne et ses enfants */
 .header-step{
     margin-top: 10px;
+
 }
 .header-step h1{
     margin-top: 10px;
@@ -19,15 +20,22 @@
     font-weight: 700;
 }
 .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    position: fixed;
+    left: 20px; /* Slight offset from the very edge */
+    top: 150px; 
+    z-index: 100;
+    
+    /* THE FIX: Use 60% width and remove max-width constraints */
+    width: 55%; 
+    max-width: none; 
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 25px;
-    background-color: #ffffff; /* Couleur de fond */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Ombre légère */
-    border-radius: 8px; /* Optionnel : pour un look "card" moderne */
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
     font-family: sans-serif;
 }
 
@@ -80,13 +88,18 @@
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 450px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: auto;
+  
+  /* THE FIX: Use 30% width and remove max-width constraints */
+  width: 30%;
+  max-width: none; 
+  
+  /* Keep it pushed to the right side */
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: 20px; /* Matches the 20px left offset of the header */
 }
 
 /* Heading Style */

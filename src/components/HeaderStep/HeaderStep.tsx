@@ -93,8 +93,14 @@ function HeaderStep() {
   onChange={(e) => setNavLinkColor(e.target.value)}
 />
         <label htmlFor="border-color">Border color:</label>
-        {/* Added value and onChange handler */}
-        <input type='color' id="border-color" value={headerBorderColor} onChange={(e) => setheaderBorderColor(e.target.value)}/>
+{/* Added the color-picker-custom class to match the nav links input */}
+<input 
+  type='color' 
+  className='color-picker-custom' 
+  id="border-color" 
+  value={headerBorderColor} 
+  onChange={(e) => setheaderBorderColor(e.target.value)}
+/>
 
         <label htmlFor="header-height">Header height(in px):</label>
         {/* Added value and onChange handler */}

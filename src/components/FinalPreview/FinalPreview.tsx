@@ -18,6 +18,13 @@ function FinalPreview() {
   const headerHeight = data.headerHeight || "";
   const navLinkColor = data.navLinkColor || "#444";
   const headerLogoWidth = data.headerLogoWidth || 100;
+
+  const productImageBgColor = data.productImageBgColor || "#ffffff";
+  const inventoryBgColor = data.inventoryBgColor || "#ffffff";
+  const productCardBgColor = data.productCardBgColor || "#ffffff";
+  const productNameColor = data.productNameColor || "#111827";
+  const productNameFontFamily = data.productNameFontFamily || "inherit";
+  const productPriceColor = data.productPriceColor || "#111827";
   
   const heroBgColor = data.heroBgColor || "#ffffff";
   const heroTitleColor = data.heroTitleColor || "#1f2937";
@@ -25,7 +32,7 @@ function FinalPreview() {
   const descColor = data.descColor || "#4b5563";
   const heroBtnColor = data.heroBtnColor || "#6366f1";
   const heroBtnTextColor = data.heroBtnTextColor || "#ffffff";
-  
+  const heroBorderColor = data.heroBorderColor || "";
   const titleFont = data.titleFont || "inherit";
   const subtitleFont = data.subtitleFont || "inherit";
   const paragraphFont = data.paragraphFont || "inherit";
@@ -108,7 +115,8 @@ function FinalPreview() {
       
       .hero-container { 
         width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 80px 8%; gap: 60px; overflow: hidden;
-        margin: 0 !important; border: none !important; position: static !important; top: auto !important; transform: none !important;
+        margin: 0 !important; position: static !important; top: auto !important; transform: none !important;
+        box-sizing: border-box;
       }
       .hero-paragraphe { flex: 1.2; }
       .hero-paragraphe h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 0 0 20px 0; }
@@ -126,12 +134,12 @@ function FinalPreview() {
     text-align: center;
 }
       .store-section { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
   padding: 30px 20px;
   color: #0f172a; }
       .store-title { text-align: center; font-size: 2.5rem; color: #1e293b; margin: 0 0 50px 0; font-family: sans-serif; }
-      .products-grid { margin: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
+     .products-grid { margin: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; justify-content: center; }
       .product-card {  background: white;
   border: 1px solid #f1f5f9;
   border-radius: 20px;
@@ -179,7 +187,8 @@ function FinalPreview() {
         </ul>
     </div>
 
-    <div id="about" class="hero-container" style="background: ${finalHeroBg};">
+    <!-- Border logic added here for the ZIP download -->
+    <div id="about" class="hero-container" style="background: ${finalHeroBg}; border: ${heroBorderColor ? `2px solid ${heroBorderColor}` : 'none'}; box-sizing: border-box;">
         <div class="hero-paragraphe">
             <h1 style="font-family: ${titleFont}; color: ${heroTitleColor};">${heroTitle}</h1>
             <h2 style="font-family: ${subtitleFont}; color: ${subheroTitleColor};">${heroSubtitle}</h2>
@@ -193,19 +202,22 @@ function FinalPreview() {
         </div>
     </div>
 
-    <div id="store" class="store-section">
+    <div id="store" class="store-section" style="background-color: ${inventoryBgColor};">
         <h2 class="store-title">Nos Produits</h2>
-        <div class="products-grid">
+        <center><div class="products-grid">
             ${processedProducts.map(p => `
-                <div class="product-card">
-                    <div class="product-image-container"><img src="${p.localPath}" alt="${p.name}"></div>
-                    <div class="product-info" style="padding: 20px;">
-                        <h3 style="margin: 0 0 10px 0;">${p.name}</h3>
-                        <div class="price-tag"><span class="price" style="color: #059669; font-weight: bold;">${p.price} MAD</span></div>
+                <div class="product-card" >
+                    <div class="product-image-container" style="background-color: ${productImageBgColor};">
+                        <img src="${p.localPath}" alt="${p.name}">
+                    </div>
+                    <!-- Fixed duplicate style attribute here -->
+                    <div class="product-info" style="padding: 20px; background-color: ${productCardBgColor};" >
+                        <h3 style="margin: 0 0 10px 0; color: ${productNameColor}; font-family: ${productNameFontFamily};">${p.name}</h3>
+                        <div class="price-tag"><span class="price" style="color: ${productPriceColor}; font-weight: bold;">${p.price} MAD</span></div>
                     </div>
                 </div>
             `).join('')}
-        </div>
+        </div></center>
     </div>
     <div style="background: #f8fafc;">
 <h1 class="heroTitle">Order your products now!</h1>
@@ -265,7 +277,6 @@ function FinalPreview() {
           .anti-gap-preview .header-container, 
           .anti-gap-preview .hero-container {
             margin: 0 !important;
-            border: none !important;
             position: static !important;
             top: auto !important;
             transform: none !important;
@@ -324,7 +335,8 @@ function FinalPreview() {
           background: finalHeroBg, /* <-- ICI EST LA MAGIE DU DÉGRADÉ */
           width: "100%",          
           boxSizing: "border-box",
-          overflow: "hidden",    
+          overflow: "hidden",
+          border: heroBorderColor ? `2px solid ${heroBorderColor}` : "none",    
         }}>
           <div className="hero-paragraphe">
             <h1 style={{ fontFamily: titleFont, color: heroTitleColor, margin: "0 0 20px 0" }}>{heroTitle}</h1>
@@ -338,18 +350,23 @@ function FinalPreview() {
         </div>
 
         {/* STORE EXACT */}
-        <div style={{ backgroundColor: "#ffffff", padding: "80px 5%", boxSizing: "border-box", width: "100%" }}>
+        {/* Fixed hardcoded "#ffffff" to dynamic inventoryBgColor */}
+        <div style={{ backgroundColor: inventoryBgColor, padding: "80px 5%", boxSizing: "border-box", width: "100%" }}>
           <h2 style={{ textAlign: "center", fontSize: "2.5rem", color: "#1e293b", margin: "0 0 50px 0", fontFamily: "sans-serif" }}>Nos Produits</h2>
           <div className="products-grid" style={{ padding: 0 }}>
             {products.map((product: any) => (
-              <div key={product.id} className="product-card" style={{ backgroundColor: "#fff" }}>
-                <div className="product-image-container">
+              /* Fixed hardcoded "#fff" to dynamic productCardBgColor */
+              <div key={product.id} className="product-card" style={{ backgroundColor: productCardBgColor }}>
+                {/* Added missing productImageBgColor */}
+                <div className="product-image-container" style={{ backgroundColor: productImageBgColor }}>
                   <img src={product.imageUrl} alt={product.name} style={{ maxWidth: "100%", objectFit: "contain" }} />
                 </div>
                 <div className="product-info" style={{ padding: "20px" }}>
-                  <h3 style={{ margin: "0 0 10px 0" }}>{product.name}</h3>
+                  {/* Fixed hardcoded text style with dynamic font/color */}
+                  <h3 style={{ margin: "0 0 10px 0", color: productNameColor, fontFamily: productNameFontFamily }}>{product.name}</h3>
                   <div className="price-tag">
-                    <span className="price" style={{ color: "#059669", fontWeight: "bold" }}>{product.price} MAD</span>
+                    {/* Fixed hardcoded "#059669" to dynamic productPriceColor */}
+                    <span className="price" style={{ color: productPriceColor, fontWeight: "bold" }}>{product.price} MAD</span>
                   </div>
                 </div>
               </div>

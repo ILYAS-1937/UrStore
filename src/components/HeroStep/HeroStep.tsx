@@ -90,7 +90,7 @@ function HeroStep() {
         className="hero-container"
         style={{ 
           backgroundColor: heroBgColor, 
-          heroBorderColor: heroBorderColor,
+          borderColor: heroBorderColor,
           borderStyle: heroBorderColor ? "solid" : "none", // Ensures border is visible if color is selected
           borderWidth: "2px"
         }}
