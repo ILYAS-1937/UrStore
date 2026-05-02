@@ -24,22 +24,23 @@ const fontFamilies = [
 
 export default function StoreStep() {
   const setField = useStore((state) => state.setField);
+  const data = useStore((state: any) => state.data) || {}; // <-- Pull saved data
   
   // --- Existing Product State ---
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState<number | ''>('');
-  const [imagePreview, setImagePreview] = useState<string>('');
+  const [products, setProducts] = useState<Product[]>(data.products || []);
+  const [isModalOpen, setIsModalOpen] = useState(data.isModalOpen || false);
+  const [name, setName] = useState(data.name || '');
+  const [price, setPrice] = useState<number | ''>(data.price || '');
+  const [imagePreview, setImagePreview] = useState<string>(data.imagePreview || '');
   
   // --- New Styling State Variables ---
-  const [productImageBgColor, setProductImageBgColor] = useState('#ffffff'); // The white background behind the product picture
-  const [inventoryBgColor, setInventoryBgColor] = useState('#ffffff'); // Background for the inventory container
-  const [productCardBgColor, setProductCardBgColor] = useState('#ffffff'); // Bottom part of the card
-  const [productNameColor, setProductNameColor] = useState('#1f2937'); // Dark gray
-  const [productNameFontFamily, setProductNameFontFamily] = useState(fontFamilies[0]);
-  const [productPriceColor, setProductPriceColor] = useState('#4f46e5'); // Indigo
-  const [isStyleFormLocked, setIsStyleFormLocked] = useState(true); // Initially locked
+  const [productImageBgColor, setProductImageBgColor] = useState(data.productImageBgColor || '#ffffff'); 
+  const [inventoryBgColor, setInventoryBgColor] = useState(data.inventoryBgColor || '#ffffff'); 
+  const [productCardBgColor, setProductCardBgColor] = useState(data.productCardBgColor || '#ffffff'); 
+  const [productNameColor, setProductNameColor] = useState(data.productNameColor || '#1f2937'); 
+  const [productNameFontFamily, setProductNameFontFamily] = useState(data.productNameFontFamily || fontFamilies[0]);
+  const [productPriceColor, setProductPriceColor] = useState(data.productPriceColor || '#4f46e5'); 
+  const [isStyleFormLocked, setIsStyleFormLocked] = useState(true);
 
   // --- Handlers ---
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {

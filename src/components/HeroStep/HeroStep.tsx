@@ -6,26 +6,28 @@ import useStore from "../../useStore";
 
 function HeroStep() {
   const setField = useStore((state) => state.setField);
+  const data = useStore((state) => state.data) || {}; // <-- Pull saved data
+
   // --- 1. State Variables ---
-  const [currentImage, setCurrentImage] = useState(heroImg);
-  const [heroImgWidth, setheroImgWidth] = useState(100);
+  const [currentImage, setCurrentImage] = useState(data.currentImage || heroImg);
+  const [heroImgWidth, setheroImgWidth] = useState(data.heroImgWidth || 100);
   
   // Font Styles
-  const [titleFont, setTitleFont] = useState("");
-  const [subtitleFont, setSubtitleFont] = useState("");
-  const [paragraphFont, setParagraphFont] = useState("");
+  const [titleFont, setTitleFont] = useState(data.titleFont || "");
+  const [subtitleFont, setSubtitleFont] = useState(data.subtitleFont || "");
+  const [paragraphFont, setParagraphFont] = useState(data.paragraphFont || "");
   
   // Colors
-  const [heroBgColor, setheroBgColor] = useState("#ffffff");
-  const [heroBorderColor, setheroBorderColor] = useState("#e2e8f0");
-  const [heroTitleColor, setheroTitleColor] = useState("#1f2937");
-  const [subheroTitleColor, setSubheroTitleColor] = useState("#4f46e5");
-  const [descColor, setDescColor] = useState("#4b5563");
-  const [heroBtnColor, setheroBtnColor] = useState("#6366f1");
-  const [heroBtnTextColor, setheroBtnTextColor] = useState("#ffffff");
-  const [heroTitle, setHeroTitle] = useState("Your hero");
-  const [heroSubtitle, setHeroSubtitle] = useState("Your hero subtitle");
-  const [heroDescription, setHeroDescription] = useState("your hero description.");
+  const [heroBgColor, setheroBgColor] = useState(data.heroBgColor || "#ffffff");
+  const [heroBorderColor, setheroBorderColor] = useState(data.heroBorderColor || "#e2e8f0");
+  const [heroTitleColor, setheroTitleColor] = useState(data.heroTitleColor || "#1f2937");
+  const [subheroTitleColor, setSubheroTitleColor] = useState(data.subheroTitleColor || "#4f46e5");
+  const [descColor, setDescColor] = useState(data.descColor || "#4b5563");
+  const [heroBtnColor, setheroBtnColor] = useState(data.heroBtnColor || "#6366f1");
+  const [heroBtnTextColor, setheroBtnTextColor] = useState(data.heroBtnTextColor || "#ffffff");
+  const [heroTitle, setHeroTitle] = useState(data.heroTitle || "Your hero");
+  const [heroSubtitle, setHeroSubtitle] = useState(data.heroSubtitle || "Your hero subtitle");
+  const [heroDescription, setHeroDescription] = useState(data.heroDescription || "your hero description.");
 
   
      useEffect(() => {

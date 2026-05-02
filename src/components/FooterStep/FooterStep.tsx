@@ -8,20 +8,21 @@ import defaultLogo from "../../images/urStoreLogo.png";
 
 function FooterStep() {
   const setField = useStore((state) => state.setField);
+  const data = useStore((state: any) => state.data) || {}; // <-- Pull saved data
 
   // --- Customization States ---
-  const [footerLogo, setFooterLogo] = useState(defaultLogo);
-  const [footerLogoWidth, setFooterLogoWidth] = useState(120);
-  const [footerBgColor, setFooterBgColor] = useState('#ffffff'); 
-  const [footerTextColor, setFooterTextColor] = useState('#1f2937'); 
-  const [footerDescription, setFooterDescription] = useState('Your store, your style, zero code.');
-  const [storeName, setStoreName] = useState('UrStore');
+  const [footerLogo, setFooterLogo] = useState(data.footerLogo || defaultLogo);
+  const [footerLogoWidth, setFooterLogoWidth] = useState(data.footerLogoWidth || 120);
+  const [footerBgColor, setFooterBgColor] = useState(data.footerBgColor || '#ffffff'); 
+  const [footerTextColor, setFooterTextColor] = useState(data.footerTextColor || '#1f2937'); 
+  const [footerDescription, setFooterDescription] = useState(data.footerDescription || 'Your store, your style, zero code.');
+  const [storeName, setStoreName] = useState(data.storeName || 'UrStore');
   
-  // Store Guarantees States (No backend needed!)
-  const [guaranteeTitle, setGuaranteeTitle] = useState('Our Guarantees');
-  const [guarantee1, setGuarantee1] = useState('🚚 Free Shipping');
-  const [guarantee2, setGuarantee2] = useState('🔒 Secure Payment');
-  const [guarantee3, setGuarantee3] = useState('💬 24/7 Support');
+  // Store Guarantees States 
+  const [guaranteeTitle, setGuaranteeTitle] = useState(data.guaranteeTitle || 'Our Guarantees');
+  const [guarantee1, setGuarantee1] = useState(data.guarantee1 || '🚚 Free Shipping');
+  const [guarantee2, setGuarantee2] = useState(data.guarantee2 || '🔒 Secure Payment');
+  const [guarantee3, setGuarantee3] = useState(data.guarantee3 || '💬 24/7 Support');
 
   // --- Sync with Global Store ---
   useEffect(() => { setField("footerLogo", footerLogo); }, [footerLogo, setField]);

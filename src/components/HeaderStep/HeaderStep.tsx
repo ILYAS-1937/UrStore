@@ -6,12 +6,15 @@ import useStore from '../../useStore';
 
 function HeaderStep() {
   const setField = useStore((state) => state.setField);
-  const [headerLogo, setheaderLogo] = useState(urStoreheaderLogo);
-  const [headerBgColor, setheaderBgColor] = useState('#ffffff');
-  const [headerBorderColor, setheaderBorderColor] = useState('#e2e8f0');
-  const [headerHeight, setHeaderHeight] = useState('');
-  const [navLinkColor, setNavLinkColor] = useState('#444');
-  const [headerLogoWidth, setheaderLogoWidth] = useState(100);
+  const data = useStore((state) => state.data) || {}; // <-- We pull the saved data here!
+
+  // Now we check 'data' first before falling back to defaults
+  const [headerLogo, setheaderLogo] = useState(data.headerLogo || urStoreheaderLogo);
+  const [headerBgColor, setheaderBgColor] = useState(data.headerBgColor || '#ffffff');
+  const [headerBorderColor, setheaderBorderColor] = useState(data.headerBorderColor || '#e2e8f0');
+  const [headerHeight, setHeaderHeight] = useState(data.headerHeight || '');
+  const [navLinkColor, setNavLinkColor] = useState(data.navLinkColor || '#444');
+  const [headerLogoWidth, setheaderLogoWidth] = useState(data.headerLogoWidth || 100);
 
    useEffect(() => {
     setField("headerLogo", headerLogo);

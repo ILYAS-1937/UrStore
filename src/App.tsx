@@ -1,4 +1,5 @@
 import { Routes ,Route} from 'react-router-dom'
+import { useEffect } from 'react';
 import './App.css'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
@@ -12,6 +13,23 @@ import ContactStep from './components/ContactStep/ConatctStep'
 import FinalPreview from './components/finalPreview/FinalPreview'
 
 function App() {
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Cancel the default event
+      e.preventDefault();
+      // Chrome and Edge require you to set the returnValue
+      e.returnValue = ''; 
+    };
+
+    // Listen for the user trying to refresh or close the tab
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Cleanup the listener if the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+  // ----------------------------------
   return (
    <Routes>
     <Route path='/' element={<>
