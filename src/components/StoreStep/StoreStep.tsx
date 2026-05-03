@@ -150,13 +150,12 @@ export default function StoreStep() {
 
   return (
     <div className="store-step-wrapper">
-      <h1 className="heroTitle"><span>Step3:</span> Customize Your Store</h1>
       
       <div className="store-step-layout">  
         
         {/* --- NEW LEFT COLUMN WRAPPER --- */}
         <div className="store-left-column">
-          
+                <h1 className="heroTitle"><span>Step3:</span> Customize Your Store</h1>
           {/* Left: Store Inventory & Grid */}
           <div className="store-inventory-wrapper" style={inventoryWrapperStyles}>
             <div className="store-header">

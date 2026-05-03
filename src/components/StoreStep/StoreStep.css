@@ -1,6 +1,12 @@
-/* --- StoreStep.css --- */
+/* ======================================================= */
+/*                     StoreStep.css                       */
+/* ======================================================= */
 
 /* --- General Page Structure --- */
+*, *::before, *::after {
+  box-sizing: border-box; /* Ensures padding doesn't break widths on small screens */
+}
+
 .store-step-wrapper {
   padding: 2rem;
   min-height: 100vh;
@@ -12,7 +18,7 @@
 .heroTitle {
   font-size: 2.5rem;
   color: #111827;
-  text-align: center;
+  text-align: left;
   margin-bottom: 2rem;
 }
 
@@ -27,6 +33,13 @@
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
   align-items: start;
+}
+
+.store-left-column {
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  z-index: 10;
 }
 
 /* --- Left: Store Inventory Wrapper (Boxed in) --- */
@@ -134,7 +147,7 @@
 /* --- Products Grid --- */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tweaked slightly for better fluidity */
   gap: 1.5rem;
   padding: 0.5rem;
 }
@@ -146,6 +159,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .product-card:hover {
@@ -161,7 +175,7 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem; 
-  box-sizing: border-box; 
+  position: relative;
 }
 
 .product-image-container img {
@@ -173,6 +187,48 @@
 
 .product-card:hover .product-image-container img {
   transform: scale(1.05);
+}
+
+/* Product Actions */
+.product-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0; 
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.product-card:hover .product-actions {
+  opacity: 1; 
+}
+
+.action-btn {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  width: 32px; /* Slightly larger for easier clicking */
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #ffffff;
+  transform: scale(1.1);
+}
+
+.action-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .product-info {
@@ -202,12 +258,13 @@
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   background-color: rgba(79, 70, 229, 0.05);
+  color: #4f46e5; /* Added a complementary color for price */
 }
 
 /* --- Empty State --- */
 .empty-state {
   text-align: center;
-  padding: 4rem;
+  padding: 4rem 1rem;
   background-color: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -286,12 +343,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6); /* Slightly darkened for better contrast */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 1rem; /* Added padding so it doesn't touch edges on phone */
+  padding: 1rem;
 }
 
 .modal-content {
@@ -301,8 +358,8 @@
   max-width: 500px;
   padding: 2rem;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  max-height: 90vh; /* Prevent modal from overflowing screen */
-  overflow-y: auto; /* Allow scrolling inside modal */
+  max-height: 90vh; 
+  overflow-y: auto; 
 }
 
 .modal-header {
@@ -324,6 +381,7 @@
   cursor: pointer;
   color: #9ca3af;
   transition: color 0.2s;
+  line-height: 1;
 }
 
 .close-btn:hover {
@@ -351,6 +409,7 @@
   font-size: 1rem;
   color: #111827;
   transition: border-color 0.2s;
+  width: 100%; /* Ensures inputs don't break containers */
 }
 
 .form-group input:focus,
@@ -364,11 +423,6 @@
   position: relative;
 }
 
-.input-with-currency input {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .currency-suffix {
   position: absolute;
   right: 1rem;
@@ -376,6 +430,7 @@
   transform: translateY(-50%);
   color: #6b7280;
   font-weight: 500;
+  pointer-events: none; /* Prevents suffix from blocking input clicks */
 }
 
 .file-upload-wrapper {
@@ -387,6 +442,7 @@
   border: none;
   font-size: 0.9rem;
   color: #6b7280;
+  width: 100%;
 }
 
 .image-preview-container {
@@ -413,10 +469,9 @@
 
 /* --- The Bottom Save/Unlock Button --- */
 .save-store-btn-container {
-  /* Reduced margin to pull it closer to the inventory box */
   display: flex;
   justify-content: center;
-
+  margin-top: 2rem; /* Added margin for spacing */
 }
 
 .save-store-btn {
@@ -471,52 +526,60 @@
 /*                 RESPONSIVE MEDIA QUERIES                */
 /* ======================================================= */
 
-/* Tablets and small laptops */
+/* --- Tablets & Small Laptops (Max 1024px) --- */
 @media screen and (max-width: 1024px) {
   .store-step-layout {
-    grid-template-columns: 1fr; /* Stack customization panel below inventory */
+    grid-template-columns: 1fr; /* Stack panels on top of each other */
+  }
+
+  .store-left-column {
+    position: static; /* Remove sticky behavior to prevent overlap */
+  }
+
+  .product-actions {
+    opacity: 1; /* Always show product actions since there's no hover on touchscreens */
+    z-index: 10;
   }
 }
 
-/* Mobile Phones */
+/* --- Mobile Phones (Max 768px) --- */
 @media screen and (max-width: 768px) {
   .store-step-wrapper {
-    padding: 1rem; /* Less padding on the edges */
+    padding: 1rem; 
   }
 
   .heroTitle {
-    font-size: 1.8rem; /* Smaller title text */
+    font-size: 1.8rem; 
     margin-bottom: 1.5rem;
   }
 
   .store-inventory-wrapper, 
   .store-customization-panel {
-    padding: 1rem; /* Save space inside the containers */
+    padding: 1rem; 
   }
 
   .store-header {
-    flex-direction: column; /* Stack header texts and button */
+    flex-direction: column; 
     align-items: flex-start;
     gap: 1rem;
   }
 
-  .store-header div h2 {
+  .store-header h2 {
     font-size: 1.25rem;
   }
 
   .btn-primary {
-    width: 100%; /* Make add product button full width for easy tapping */
+    width: 100%; 
     justify-content: center;
   }
 
-  /* Make sure product grid spans nicely on mobile (1 card per row) */
   .products-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 1 product per row on mobile */
     gap: 1rem;
   }
 
   .product-image-container {
-    height: 180px; /* slightly smaller image container on phone */
+    height: 180px; 
   }
 
   .modal-content {
@@ -524,11 +587,11 @@
   }
 
   .modal-actions {
-    flex-direction: column-reverse; /* Put primary button on top */
+    flex-direction: column-reverse; 
   }
 
   .modal-actions button {
-    width: 100%; /* Full width buttons in modal */
+    width: 100%; 
     padding: 1rem;
   }
   
@@ -537,60 +600,32 @@
     font-size: 1rem;
   }
 }
-/* --- New Action Buttons on Product Cards --- */
-.product-image-container {
-  /* ... existing styles ... */
-  position: relative; /* Crucial for absolute positioning of actions */
-}
 
-.product-actions {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  display: flex;
-  gap: 0.5rem;
-  opacity: 0; /* Hidden by default */
-  transition: opacity 0.3s ease;
-  z-index: 10; /* Ensure it is above the image */
-}
+/* --- Extra Small Phones (Max 480px) --- */
+@media screen and (max-width: 480px) {
+  .store-step-wrapper {
+    padding: 0.5rem; /* Maximize screen real estate */
+  }
 
-.product-card:hover .product-actions {
-  opacity: 1; /* Shown on hover */
-}
+  .heroTitle {
+    font-size: 1.5rem;
+  }
 
-.action-btn {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: none;
-  padding: 0.3rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s, transform 0.2s;
-}
+  .store-inventory-wrapper, 
+  .store-customization-panel {
+    padding: 0.75rem; 
+    border-radius: 0.75rem; /* Slightly smaller border radius */
+  }
 
-.action-btn:hover {
-  background-color: rgba(255, 255, 255, 1);
-  transform: scale(1.1);
-}
+  .product-info h3 {
+    font-size: 1rem; /* Adjust heading sizes down */
+  }
 
-.action-btn img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+  .empty-state {
+    padding: 2rem 1rem;
+  }
 
-/* Tablet and Mobile adjustments */
-@media screen and (max-width: 1024px) {
-  /* ... original styles ... */
-  
-  /* Ensure actions are always visible on smaller screens since there is no hover */
-  .product-actions {
-    opacity: 1;
-    z-index: 10;
+  .empty-icon {
+    font-size: 3rem;
   }
 }

@@ -100,7 +100,7 @@ function FinalPreview() {
       }))
     );
 
-    const htmlContent = `
+  const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,9 +121,22 @@ function FinalPreview() {
       .hero-paragraphe h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 0 0 20px 0; }
       .hero-paragraphe h2 { font-size: 1.25rem; text-transform: uppercase; margin: 0 0 25px 0; }
       .hero-paragraphe p { font-size: 1.15rem; line-height: 1.7; margin: 0 0 35px 0; }
-      .hero-button { padding: 16px 36px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; }
+      .hero-button { padding: 16px 36px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: transform 0.3s ease; }
+      .hero-button:hover { transform: scale(1.05); }
+      
+      /* --- FIX 2: Hero Image Animation --- */
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
       .hero-image { flex: 1; display: flex; justify-content: center; max-width: 100%; }
-      .hero-image img { max-width: 100%; object-fit: cover; }
+      .hero-image img { 
+        max-width: 100%; 
+        object-fit: cover; 
+        animation: float 4s ease-in-out infinite; /* Added Floating Animation */
+      }
+      
       .heroTitle{ margin-top: 10px; font-size: 50px; color: #2d3748; padding: 5px; font-weight: 700; text-align: center; }
       .store-section { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; width: 100%; margin: 0 auto; padding: 30px 20px; color: #0f172a; }
       .store-title { text-align: center; font-size: 2.5rem; color: #1e293b; margin: 0 0 50px 0; font-family: sans-serif; }
@@ -133,13 +146,33 @@ function FinalPreview() {
       .product-image-container img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.4s ease; }
       .product-card:hover .product-image-container img {transform: scale(1.08)}
       .product-card:hover { transform: translateY(-6px);box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04)}
+      
+      /* --- FIX 3: Contact Buttons Hover Animations --- */
       .preview-buttons { padding: 40px 5%; display: flex; justify-content: center; gap: 15px; }
-      .contact-btn { padding: 12px 25px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer; text-decoration: none; }
+      .contact-btn { 
+        padding: 12px 25px; 
+        border: none; 
+        border-radius: 8px; 
+        color: white; 
+        font-weight: 600; 
+        cursor: pointer; 
+        text-decoration: none; 
+        transition: all 0.3s ease; /* Added transition */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+      .contact-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+      }
       .whatsapp-btn { background-color: #25D366; }
+      .whatsapp-btn:hover { background-color: #1ebd5a; }
+      
       .instagram-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743); }
+      .instagram-btn:hover { filter: brightness(1.1); }
+      
       .email-btn { background-color: #ea4335; }
+      .email-btn:hover { background-color: #d6382b; }
 
-      /* --- CORRECTION DU FOOTER DANS LE ZIP --- */
       .dynamic-footer-preview { padding: 20px 5% 15px; display: flex; flex-direction: column; width: 100%; align-items: center; }
       .footer-main-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 1100px; margin: 0 auto; }
       .footer-brand-side { max-width: 350px; }
@@ -160,11 +193,12 @@ function FinalPreview() {
         </ul>
     </div>
 
+    <!-- FIX 1: Added single quotes around font-family variables so spaces don't break the CSS -->
     <div id="about" class="hero-container" style="background: ${finalHeroBg}; border: ${heroBorderColor ? `2px solid ${heroBorderColor}` : 'none'}; box-sizing: border-box;">
         <div class="hero-paragraphe">
-            <h1 style="font-family: ${titleFont}; color: ${heroTitleColor};">${heroTitle}</h1>
-            <h2 style="font-family: ${subtitleFont}; color: ${subheroTitleColor};">${heroSubtitle}</h2>
-            <p style="font-family: ${paragraphFont}; color: ${descColor};">${heroDescription}</p>
+            <h1 style="font-family: '${titleFont}'; color: ${heroTitleColor};">${heroTitle}</h1>
+            <h2 style="font-family: '${subtitleFont}'; color: ${subheroTitleColor};">${heroSubtitle}</h2>
+            <p style="font-family: '${paragraphFont}'; color: ${descColor};">${heroDescription}</p>
             <a href="#store">
                 <button class="hero-button" style="background-color: ${heroBtnColor}; color: ${heroBtnTextColor};">View Menu Now</button>
             </a>
@@ -183,7 +217,7 @@ function FinalPreview() {
                         <img src="${p.localPath}" alt="${p.name}">
                     </div>
                     <div class="product-info" style="padding: 20px; background-color: ${productCardBgColor};" >
-                        <h3 style="margin: 0 0 10px 0; color: ${productNameColor}; font-family: ${productNameFontFamily};">${p.name}</h3>
+                        <h3 style="margin: 0 0 10px 0; color: ${productNameColor}; font-family: '${productNameFontFamily}';">${p.name}</h3>
                         <div class="price-tag"><span class="price" style="color: ${productPriceColor}; font-weight: bold;">${p.price} MAD</span></div>
                     </div>
                 </div>
@@ -453,7 +487,7 @@ function FinalPreview() {
         </div>
 
         <div style={{ background: contactBgColor }}>
-       <h1 className="heroTitle" style={{ margin: 0, paddingTop: "40px" }}>Order your products now!</h1>
+       <center><h1 style={{ textAlign: "center", fontSize: "2.5rem", color: "#1e293b", margin: "0 0 50px 0", fontFamily: "sans-serif" }}>Order your products now!</h1></center>
         {(whatsapp || instagram || email) && (
           <div className="preview-buttons" style={{ padding: "40px 5%", display: "flex", justifyContent: "center", gap: "15px", flexDirection: "row", backgroundColor: contactBgColor, boxSizing: "border-box", width: "100%" }}>
             {whatsapp && <button className="contact-btn whatsapp-btn">Contact via WhatsApp</button>}

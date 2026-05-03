@@ -29,52 +29,52 @@ function HeroStep() {
   const [heroSubtitle, setHeroSubtitle] = useState(data.heroSubtitle || "Your hero subtitle");
   const [heroDescription, setHeroDescription] = useState(data.heroDescription || "your hero description.");
 
-  
-     useEffect(() => {
-      setField("currentImage", currentImage);
-    }, [currentImage]);
-      useEffect(() => {
-      setField("heroImgWidth", heroImgWidth);
-    }, [heroImgWidth]);
-      useEffect(() => {
-      setField("titleFont", titleFont);
-    }, [titleFont]);
-      useEffect(() => {
-      setField("subtitleFont", subtitleFont);
-    }, [subtitleFont]); 
-      useEffect(() => {
-      setField("paragraphFont", paragraphFont);
-    }, [paragraphFont]);
-      useEffect(() => {
-      setField("heroBgColor", heroBgColor);
-    }, [heroBgColor]);
-      useEffect(() => {
-      setField("heroBorderColor", heroBorderColor);
-    } , [heroBorderColor]);
-      useEffect(() => {
-      setField("heroTitleColor", heroTitleColor);
-    }, [heroTitleColor]);
-      useEffect(() => {
-      setField("subheroTitleColor", subheroTitleColor);
-    }, [subheroTitleColor]);
-      useEffect(() => {
-      setField("descColor", descColor);
-    }, [descColor]);  
-      useEffect(() => {
-      setField("heroBtnColor", heroBtnColor);
-    }, [heroBtnColor]);
-      useEffect(() => {
-      setField("heroBtnTextColor", heroBtnTextColor);
-    }, [heroBtnTextColor]);
-      useEffect(() => {
-      setField("heroTitle", heroTitle);
-    }, [heroTitle]);
-      useEffect(() => {
-      setField("heroSubtitle", heroSubtitle);
-    }, [heroSubtitle]);
-      useEffect(() => {
-      setField("heroDescription", heroDescription);
-    }, [heroDescription]);
+  useEffect(() => {
+    setField("currentImage", currentImage);
+  }, [currentImage]);
+  useEffect(() => {
+    setField("heroImgWidth", heroImgWidth);
+  }, [heroImgWidth]);
+  useEffect(() => {
+    setField("titleFont", titleFont);
+  }, [titleFont]);
+  useEffect(() => {
+    setField("subtitleFont", subtitleFont);
+  }, [subtitleFont]); 
+  useEffect(() => {
+    setField("paragraphFont", paragraphFont);
+  }, [paragraphFont]);
+  useEffect(() => {
+    setField("heroBgColor", heroBgColor);
+  }, [heroBgColor]);
+  useEffect(() => {
+    setField("heroBorderColor", heroBorderColor);
+  } , [heroBorderColor]);
+  useEffect(() => {
+    setField("heroTitleColor", heroTitleColor);
+  }, [heroTitleColor]);
+  useEffect(() => {
+    setField("subheroTitleColor", subheroTitleColor);
+  }, [subheroTitleColor]);
+  useEffect(() => {
+    setField("descColor", descColor);
+  }, [descColor]);  
+  useEffect(() => {
+    setField("heroBtnColor", heroBtnColor);
+  }, [heroBtnColor]);
+  useEffect(() => {
+    setField("heroBtnTextColor", heroBtnTextColor);
+  }, [heroBtnTextColor]);
+  useEffect(() => {
+    setField("heroTitle", heroTitle);
+  }, [heroTitle]);
+  useEffect(() => {
+    setField("heroSubtitle", heroSubtitle);
+  }, [heroSubtitle]);
+  useEffect(() => {
+    setField("heroDescription", heroDescription);
+  }, [heroDescription]);
+
   // --- 2. Handlers ---
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -86,183 +86,199 @@ function HeroStep() {
 
   return (
     <div className="all">
-    <h1 className="heroTitle"><span>Step2:</span> Customize Your Store Hero</h1>
-    <div className="hero-step">
-      <div 
-        className="hero-container"
-        style={{ 
-          backgroundColor: heroBgColor, 
-          borderColor: heroBorderColor,
-          borderStyle: heroBorderColor ? "solid" : "none", // Ensures border is visible if color is selected
-          borderWidth: "2px"
-        }}
-      >
-        <div className="hero-paragraphe">
-          <h1 style={{ fontFamily: titleFont, color: heroTitleColor }}>     
-           {heroTitle}
-          </h1>
-          <h2 style={{ fontFamily: subtitleFont, color: subheroTitleColor }}>
-            {heroSubtitle}
-          </h2>
-          <p style={{ fontFamily: paragraphFont, color: descColor }}>
-           {heroDescription}
-          </p>
-          <button 
-            className="hero-button"
-            style={{ backgroundColor: heroBtnColor, color: heroBtnTextColor }}
+      <div className="hero-step">
+        
+        {/* LEFT SECTION: Contains both the Title and the Hero Container */}
+        <div className="hero-left-wrapper">
+          <h1 className="heroTitle"><span>Step2:</span> Customize Your Store Hero</h1>
+          
+          <div 
+            className="hero-container"
+            style={{ 
+              backgroundColor: heroBgColor, 
+              borderColor: heroBorderColor,
+              borderStyle: heroBorderColor ? "solid" : "none", // Ensures border is visible if color is selected
+              borderWidth: "2px"
+            }}
           >
-            View Menu Now
-          </button>
+            <div className="hero-paragraphe">
+              <h1 style={{ fontFamily: titleFont, color: heroTitleColor }}>     
+               {heroTitle}
+              </h1>
+              <h2 style={{ fontFamily: subtitleFont, color: subheroTitleColor }}>
+                {heroSubtitle}
+              </h2>
+              <p style={{ fontFamily: paragraphFont, color: descColor }}>
+               {heroDescription}
+              </p>
+              <button 
+                className="hero-button"
+                style={{ backgroundColor: heroBtnColor, color: heroBtnTextColor }}
+              >
+                View Menu Now
+              </button>
+            </div>
+
+            <div className="hero-image">
+              <img 
+                src={currentImage} 
+                alt="Platform Preview" 
+                style={{ width: `${heroImgWidth}%` }} 
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="hero-image">
-          <img 
-            src={currentImage} 
-            alt="Platform Preview" 
-            style={{ width: `${heroImgWidth}%` }} 
+        {/* RIGHT SECTION: Form */}
+        <form className="hero-form" onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="hero-img">Import your store hero image:</label>
+          <input type="file" id="hero-img" accept="image/*" onChange={handleImageChange} />
+          
+          <label htmlFor="hero-img-width">Logo width:</label>
+          <input 
+            type="range" 
+            id="hero-img-width" 
+            min="80" max="150" 
+            value={heroImgWidth} 
+            onChange={(e) => setheroImgWidth(e.target.value)} 
           />
-        </div>
+          
+          <label htmlFor="hero-title">type your store hero title:</label>
+          <input 
+            className="hero-input-custom"
+            type="text" 
+            id="hero-title" 
+            value={heroTitle} 
+            onChange={(e) => setHeroTitle(e.target.value)} 
+          />
+
+          <label htmlFor="hero-subtitle">type your store hero subtitle:</label>
+          <input 
+            className="hero-input-custom"
+            type="text" 
+            id="hero-subtitle" 
+            value={heroSubtitle} 
+            onChange={(e) => setHeroSubtitle(e.target.value)} 
+          />
+
+          <label htmlFor="hero-paragraph">type your store hero description:</label>
+          <textarea
+            className="hero-input-custom"
+            id="hero-paragraph" 
+            value={heroDescription} 
+            onChange={(e) => setHeroDescription(e.target.value)} 
+            rows={4} // Ajoute de la hauteur visible pour les longs textes
+            style={{ resize: "vertical" }} // Permet à l'utilisateur d'agrandir la zone
+          />
+          
+          <label htmlFor="title-text-style">Title text style:</label>
+          <select value={titleFont} onChange={(e) => setTitleFont(e.target.value)}>
+            <option value="">Select Font Family</option>
+            <option value="Arial">Arial</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Brush Script MT">Brush Script MT</option>
+            <option value="Impact">Impact</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+            <option value="Palatino Linotype">Palatino Linotype</option>
+            <option value="Segoe UI">Segoe UI</option>
+            <option value="Candara">Candara</option>
+            <option value="Calibri">Calibri</option>
+            <option value="Cambria">Cambria</option>
+            <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+            <option value="Monospace">monospace</option>
+            <option value="Sans Serif">sans-serif</option>
+            <option value="Serif">serif</option>
+            <option value="Cursive">cursive</option>
+            <option value="Fantasy">fantasy</option>
+          </select>
+
+          <label htmlFor="subtitle-text-style">Subtitle text style:</label>
+          <select value={subtitleFont} onChange={(e) => setSubtitleFont(e.target.value)}>
+            <option value="">Select Font Family</option>
+            <option value="Arial">Arial</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Brush Script MT">Brush Script MT</option>
+            <option value="Impact">Impact</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+            <option value="Palatino Linotype">Palatino Linotype</option>
+            <option value="Segoe UI">Segoe UI</option>
+            <option value="Candara">Candara</option>
+            <option value="Calibri">Calibri</option>
+            <option value="Cambria">Cambria</option>
+            <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+            <option value="Monospace">monospace</option>
+            <option value="Sans Serif">sans-serif</option>
+            <option value="Serif">serif</option>
+            <option value="Cursive">cursive</option>
+            <option value="Fantasy">fantasy</option>
+          </select>
+
+          <label htmlFor="paragraph-text-style">Paragraph text style:</label>
+          <select value={paragraphFont} onChange={(e) => setParagraphFont(e.target.value)}>
+            <option value="">Select Font Family</option>
+            <option value="Arial">Arial</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Brush Script MT">Brush Script MT</option>
+            <option value="Impact">Impact</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+            <option value="Palatino Linotype">Palatino Linotype</option>
+            <option value="Segoe UI">Segoe UI</option>
+            <option value="Candara">Candara</option>
+            <option value="Calibri">Calibri</option>
+            <option value="Cambria">Cambria</option>
+            <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+            <option value="Monospace">monospace</option>
+            <option value="Sans Serif">sans-serif</option>
+            <option value="Serif">serif</option>
+            <option value="Cursive">cursive</option>
+            <option value="Fantasy">fantasy</option>
+          </select>
+
+          <label htmlFor="back-color">Hero background-color:</label>
+          <input type="color" className='color-picker-custom' value={heroBgColor} onChange={(e) => setheroBgColor(e.target.value)}/>
+          
+          <label htmlFor="title-color">Title color:</label>
+          <input className='color-picker-custom' type="color" value={heroTitleColor} onChange={(e) => setheroTitleColor(e.target.value)}/>
+          
+          <label htmlFor="subtitle-color">Subtitle color:</label>
+          <input className='color-picker-custom' type="color" value={subheroTitleColor} onChange={(e) => setSubheroTitleColor(e.target.value)}/>
+          
+          <label htmlFor="description-color">Description color:</label>
+          <input className='color-picker-custom' type="color" value={descColor} onChange={(e) => setDescColor(e.target.value)}/>
+          
+          <label htmlFor="hero-btn-color">Button color:</label>
+          <input className='color-picker-custom' type="color" value={heroBtnColor} onChange={(e) => setheroBtnColor(e.target.value)}/>
+          
+          <label htmlFor="hero-btn-text-color">Button text color:</label>
+          <input className='color-picker-custom' type="color" value={heroBtnTextColor} onChange={(e) => setheroBtnTextColor(e.target.value)}/>
+          
+          <Link to="/store-step"><button type="submit">Save Hero</button></Link>
+        </form>
       </div>
-      <form className="hero-form" onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="hero-img">Import your store hero image:</label>
-        <input type="file" id="hero-img" accept="image/*" onChange={handleImageChange} />
-        <label htmlFor="hero-img-width">Logo width:</label>
-        <input 
-          type="range" 
-          id="hero-img-width" 
-          min="80" max="150" 
-          value={heroImgWidth} 
-          onChange={(e) => setheroImgWidth(e.target.value)} 
-        />
-        <label htmlFor="hero-title">type your store hero title:</label>
-        <input 
-          className="hero-input-custom"
-          type="text" 
-          id="hero-title" 
-          value={heroTitle} 
-          onChange={(e) => setHeroTitle(e.target.value)} 
-        />
-
-        <label htmlFor="hero-subtitle">type your store hero subtitle:</label>
-        <input 
-        className="hero-input-custom"
-          type="text" 
-          id="hero-subtitle" 
-          value={heroSubtitle} 
-          onChange={(e) => setHeroSubtitle(e.target.value)} 
-        />
-
-        <label htmlFor="hero-paragraph">type your store hero description:</label>
-<textarea
-className="hero-input-custom"
-  id="hero-paragraph" 
-  value={heroDescription} 
-  onChange={(e) => setHeroDescription(e.target.value)} 
-  rows={4} // Ajoute de la hauteur visible pour les longs textes
-  style={{ resize: "vertical" }} // Permet à l'utilisateur d'agrandir la zone
-/>
-        <label htmlFor="title-text-style">Title text style:</label>
-        <select value={titleFont} onChange={(e) => setTitleFont(e.target.value)}>
-          <option value="">Select Font Family</option>
-        <option value="Arial">Arial</option>
-        <option value="Helvetica">Helvetica</option>
-        <option value="Verdana">Verdana</option>
-         <option value="Tahoma">Tahoma</option>
-        <option value="Trebuchet MS">Trebuchet MS</option>
-  <option value="Times New Roman">Times New Roman</option>
-  <option value="Georgia">Georgia</option>
-  <option value="Garamond">Garamond</option>
-  <option value="Courier New">Courier New</option>
-  <option value="Brush Script MT">Brush Script MT</option>
-  <option value="Impact">Impact</option>
-  <option value="Comic Sans MS">Comic Sans MS</option>
-  <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-  <option value="Palatino Linotype">Palatino Linotype</option>
-  <option value="Segoe UI">Segoe UI</option>
-  <option value="Candara">Candara</option>
-  <option value="Calibri">Calibri</option>
-  <option value="Cambria">Cambria</option>
-  <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
-  <option value="Monospace">monospace</option>
-  <option value="Sans Serif">sans-serif</option>
-  <option value="Serif">serif</option>
-  <option value="Cursive">cursive</option>
-  <option value="Fantasy">fantasy</option>
-        </select>
-
-        <label htmlFor="subtitle-text-style">Subtitle text style:</label>
-        <select value={subtitleFont} onChange={(e) => setSubtitleFont(e.target.value)}>
-          <option value="">Select Font Family</option>
-          <option value="Arial">Arial</option>
-        <option value="Helvetica">Helvetica</option>
-        <option value="Verdana">Verdana</option>
-         <option value="Tahoma">Tahoma</option>
-        <option value="Trebuchet MS">Trebuchet MS</option>
-  <option value="Times New Roman">Times New Roman</option>
-  <option value="Georgia">Georgia</option>
-  <option value="Garamond">Garamond</option>
-  <option value="Courier New">Courier New</option>
-  <option value="Brush Script MT">Brush Script MT</option>
-  <option value="Impact">Impact</option>
-  <option value="Comic Sans MS">Comic Sans MS</option>
-  <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-  <option value="Palatino Linotype">Palatino Linotype</option>
-  <option value="Segoe UI">Segoe UI</option>
-  <option value="Candara">Candara</option>
-  <option value="Calibri">Calibri</option>
-  <option value="Cambria">Cambria</option>
-  <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
-  <option value="Monospace">monospace</option>
-  <option value="Sans Serif">sans-serif</option>
-  <option value="Serif">serif</option>
-  <option value="Cursive">cursive</option>
-  <option value="Fantasy">fantasy</option>
-        </select>
-
-        <label htmlFor="paragraph-text-style">Paragraph text style:</label>
-        <select value={paragraphFont} onChange={(e) => setParagraphFont(e.target.value)}>
-          <option value="">Select Font Family</option>
-          <option value="Arial">Arial</option>
-        <option value="Helvetica">Helvetica</option>
-        <option value="Verdana">Verdana</option>
-         <option value="Tahoma">Tahoma</option>
-        <option value="Trebuchet MS">Trebuchet MS</option>
-  <option value="Times New Roman">Times New Roman</option>
-  <option value="Georgia">Georgia</option>
-  <option value="Garamond">Garamond</option>
-  <option value="Courier New">Courier New</option>
-  <option value="Brush Script MT">Brush Script MT</option>
-  <option value="Impact">Impact</option>
-  <option value="Comic Sans MS">Comic Sans MS</option>
-  <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-  <option value="Palatino Linotype">Palatino Linotype</option>
-  <option value="Segoe UI">Segoe UI</option>
-  <option value="Candara">Candara</option>
-  <option value="Calibri">Calibri</option>
-  <option value="Cambria">Cambria</option>
-  <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
-  <option value="Monospace">monospace</option>
-  <option value="Sans Serif">sans-serif</option>
-  <option value="Serif">serif</option>
-  <option value="Cursive">cursive</option>
-  <option value="Fantasy">fantasy</option>
-        </select>
-
-        <label htmlFor="back-color">Hero background-color:</label>
-        <input type="color" className='color-picker-custom' value={heroBgColor} onChange={(e) => setheroBgColor(e.target.value)}/>
-        <label htmlFor="title-color">Title color:</label>
-        <input className='color-picker-custom' type="color" value={heroTitleColor} onChange={(e) => setheroTitleColor(e.target.value)}/>
-        <label htmlFor="subtitle-color">Subtitle color:</label>
-        <input className='color-picker-custom' type="color" value={subheroTitleColor} onChange={(e) => setSubheroTitleColor(e.target.value)}/>
-        <label htmlFor="description-color">Description color:</label>
-        <input className='color-picker-custom' type="color" value={descColor} onChange={(e) => setDescColor(e.target.value)}/>
-        <label htmlFor="hero-btn-color">Button color:</label>
-        <input className='color-picker-custom' type="color" value={heroBtnColor} onChange={(e) => setheroBtnColor(e.target.value)}/>
-        <label htmlFor="hero-btn-text-color">Button text color:</label>
-        <input className='color-picker-custom' type="color" value={heroBtnTextColor} onChange={(e) => setheroBtnTextColor(e.target.value)}/>
-        <Link to="/store-step"><button type="submit">Save Hero</button></Link>
-      </form>
-    </div>
     </div>
   );
 }

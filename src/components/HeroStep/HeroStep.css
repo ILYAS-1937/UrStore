@@ -10,21 +10,22 @@
     gap:30px;
     margin:10px;
 }
-.heroTitle{
+.heroTitle {
     margin-top: 10px;
     font-size: 50px;
     color: #2d3748;
     padding: 5px;
     font-weight: 700;
-    text-align: center;
+    text-align: left; /* Changed to left */
 }
-.heroTitle span{
+
+.heroTitle span {
     margin-top: 10px;
     font-size: 50px;
     color: #3261b2;
     padding: 5px;
-    text-align: center;
     font-weight: 700;
+    text-align: left; /* Changed to left */
 }
 .hero-container {
   display: flex;
@@ -38,14 +39,18 @@
     #ffffff;
   gap: 60px;
   overflow: hidden;
-  align-self: flex-start;
-  margin-top: 100px;
-
+  margin-top: 20px; /* Reduced from 100px so it sits nicely under the title */
   
-  /* --- AJOUTS ICI --- */
+  /* REMOVED sticky, top, z-index, and align-self from here */
+}
+
+.hero-left-wrapper {
+  /* ADDED sticky properties here so the title and container stick together */
   position: sticky;
-  top: 20px; /* L'espace entre le haut de l'écran et le composant quand il défile */
-  z-index: 10; /* Pour s'assurer qu'il passe au-dessus du reste si nécessaire */
+  top: 20px; 
+  align-self: flex-start;
+  z-index: 10; 
+  flex: 1.2; /* Helps it take up the proper amount of width on the left */
 }
 /* --- Text Content Styling --- */
 .hero-paragraphe {
@@ -378,14 +383,18 @@ textarea.hero-input-custom {
 }
 /* --- Responsive Layout --- */
 @media (max-width: 1024px) {
+  .hero-left-wrapper {
+    position: static; /* Disables sticky effect on small screens */
+  }
+
   .hero-container {
     flex-direction: column;
     text-align: center;
     padding: 80px 5%;
     justify-content: center;
-    
-    /* --- AJOUT ICI --- */
-    position: static; /* Désactive l'effet sticky sur les petits écrans */
+    position: static; 
+    width: 95%; 
+    margin-top: 20px;
   }
 
   .hero-paragraphe {
