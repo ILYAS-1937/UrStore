@@ -11,6 +11,7 @@ import StoreStep from './components/StoreStep/StoreStep'
 import FooterStep from './components/FooterStep/FooterStep'
 import ContactStep from './components/ContactStep/ConatctStep'
 import FinalPreview from './components/finalPreview/FinalPreview'
+import SetupWizard from './components/SetupWizard/SetupWizard'
 
 function App() {
   useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
   <Route path="contact-step" element={<ContactStep/>}/>
   <Route path="footer-step" element={<FooterStep/>}/>
   <Route path="final-preview" element={<FinalPreview/>}/>
+  <Route path="setup-wizard" element={<SetupWizard/>}/>
    </Routes>
   )
 }

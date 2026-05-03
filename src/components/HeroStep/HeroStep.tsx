@@ -250,9 +250,6 @@ className="hero-input-custom"
 
         <label htmlFor="back-color">Hero background-color:</label>
         <input type="color" className='color-picker-custom' value={heroBgColor} onChange={(e) => setheroBgColor(e.target.value)}/>
-
-        <label htmlFor="border-color">Border color:</label>
-        <input className='color-picker-custom' type="color" value={heroBorderColor} onChange={(e) => setheroBorderColor(e.target.value)}/>
         <label htmlFor="title-color">Title color:</label>
         <input className='color-picker-custom' type="color" value={heroTitleColor} onChange={(e) => setheroTitleColor(e.target.value)}/>
         <label htmlFor="subtitle-color">Subtitle color:</label>

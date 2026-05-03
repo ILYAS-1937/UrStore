@@ -13,9 +13,9 @@ function Hero() {
           design a stunning store using a completely visual editor. 
           Your business deserves a beautiful home.
         </p>
-        <Link to="/header-step">
-          <button className="cta-button">Start Building Free</button>
-        </Link>
+        <Link to="/setup-wizard">
+  <button className="cta-button">Start Building Free</button>
+</Link>
       </div>
       
       <div className="heroImage">

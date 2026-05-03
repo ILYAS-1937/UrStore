@@ -1,0 +1,148 @@
+.wizard-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 20px;
+}
+
+.wizard-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.wizard-header {
+  padding: 30px 30px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.wizard-header h2 {
+  margin: 0 0 15px 0;
+  color: #1e293b;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+.wizard-body {
+  padding: 30px;
+  min-height: 250px;
+}
+
+.wizard-step h3 {
+  margin-top: 0;
+  color: #0f172a;
+}
+
+.wizard-step input, 
+.wizard-step select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Color Grids */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.color-circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s;
+}
+
+.color-circle:hover {
+  transform: scale(1.1);
+}
+
+.color-circle.selected {
+  border: 3px solid #0f172a;
+  transform: scale(1.15);
+  box-shadow: 0 0 0 2px #ffffff inset;
+}
+
+.palette-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.palette-row {
+  display: flex;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.palette-row:hover {
+  border-color: #cbd5e1;
+}
+
+.palette-color {
+  flex: 1;
+}
+
+/* Footer Buttons */
+.wizard-footer {
+  padding: 20px 30px;
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #f1f5f9;
+}
+
+.wizard-footer button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-back, .btn-skip {
+  background-color: transparent;
+  color: #64748b;
+}
+
+.btn-back:hover, .btn-skip:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-next, .btn-submit {
+  background-color: #3b82f6;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn-next:disabled, .btn-submit:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}

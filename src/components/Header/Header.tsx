@@ -14,9 +14,9 @@ function Header() {
         </ul>
       </nav>
 
-      <Link to="/header-step">
-        <button className="cta-button">Start Now</button>
-      </Link>
+     <Link to="/setup-wizard">
+  <button className="cta-button">Start Now</button>
+</Link>
     </header>
   );
 }
