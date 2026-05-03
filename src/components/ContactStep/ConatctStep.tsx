@@ -10,12 +10,12 @@ import gmailImg from "../../images/gmail.png";
 
 function ContactStep() {
   const setField = useStore((state) => state.setField);
+  const data = useStore((state) => state.data) || {};
 
-  // State for contact details & background color
-  const [whatsapp, setWhatsapp] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [email, setEmail] = useState('');
-  const [contactBgColor, setContactBgColor] = useState('#f8fafc'); // Ajout du background par défaut
+ const [whatsapp, setWhatsapp] = useState(data.whatsapp || '');
+  const [instagram, setInstagram] = useState(data.instagram || '');
+  const [email, setEmail] = useState(data.email || '');
+  const [contactBgColor, setContactBgColor] = useState(data.contactBgColor || '#f8fafc');
 
   // Sync with global store
   useEffect(() => { setField("whatsapp", whatsapp); }, [whatsapp, setField]);
