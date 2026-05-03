@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import './StoreStep.css';
 import useStore from '../../useStore';
 
+// Assuming these images exist in the same directory as this file
+import editIcon from '../../images/edit.png';
+import deleteIcon from '../../images/delete.png';
+
 interface Product {
   id: string;
   name: string;
@@ -33,6 +37,9 @@ export default function StoreStep() {
   const [price, setPrice] = useState<number | ''>(data.price || '');
   const [imagePreview, setImagePreview] = useState<string>(data.imagePreview || '');
   
+  // --- New State for Editing ---
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+
   // --- New Styling State Variables ---
   const [productImageBgColor, setProductImageBgColor] = useState(data.productImageBgColor || '#ffffff'); 
   const [inventoryBgColor, setInventoryBgColor] = useState(data.inventoryBgColor || '#ffffff'); 
@@ -54,14 +61,40 @@ export default function StoreStep() {
   const handleSubmitProduct = (e: FormEvent) => {
     e.preventDefault();
     if (!name || price === '' || !imagePreview) return;
-    const newProduct: Product = {
-      id: Date.now().toString(),
-      name,
-      price: Number(price),
-      imageUrl: imagePreview,
-    };
-    setProducts([...products, newProduct]);
+
+    if (editingProduct) {
+      // Edit existing product
+      const updatedProduct: Product = {
+        id: editingProduct.id,
+        name,
+        price: Number(price),
+        imageUrl: imagePreview,
+      };
+      setProducts(products.map(p => p.id === editingProduct.id ? updatedProduct : p));
+    } else {
+      // Add new product
+      const newProduct: Product = {
+        id: Date.now().toString(),
+        name,
+        price: Number(price),
+        imageUrl: imagePreview,
+      };
+      setProducts([...products, newProduct]);
+    }
     closeModal();
+  };
+
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    setName(product.name);
+    setPrice(product.price);
+    setImagePreview(product.imageUrl);
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteProduct = (productId: string) => {
+    // Basic confirmation can be added here
+    setProducts(products.filter(p => p.id !== productId));
   };
 
   const closeModal = () => {
@@ -69,6 +102,7 @@ export default function StoreStep() {
     setName('');
     setPrice('');
     setImagePreview('');
+    setEditingProduct(null); // Reset editing state
   };
 
   // Logic to unlock the customization form
@@ -118,52 +152,85 @@ export default function StoreStep() {
     <div className="store-step-wrapper">
       <h1 className="heroTitle"><span>Step3:</span> Customize Your Store</h1>
       
-      <div className="store-step-layout">
+      <div className="store-step-layout">  
         
-        {/* Left: Store Inventory & Grid */}
-        <div className="store-inventory-wrapper" style={inventoryWrapperStyles}>
-          <div className="store-header">
-            <div>
-              <h2>Store Inventory</h2>
-              <p className="subtitle">Manage your UrStore products and catalog.</p>
-            </div>
-            <button className="btn-primary" onClick={() => setIsModalOpen(true)}>
-              <span className="plus-icon">+</span> Add Product
-            </button>
-          </div>
-
-          {/* Products Grid */}
-          {products.length === 0 ? (
-            <div className="empty-state">
-              <div className="empty-icon">🛍️</div>
-              <h3>Your store is looking a bit empty</h3>
-              <p>Add your first product to start building your catalog.</p>
-              <button className="btn-secondary mt-3" onClick={() => setIsModalOpen(true)}>
-                Add First Product
+        {/* --- NEW LEFT COLUMN WRAPPER --- */}
+        <div className="store-left-column">
+          
+          {/* Left: Store Inventory & Grid */}
+          <div className="store-inventory-wrapper" style={inventoryWrapperStyles}>
+            <div className="store-header">
+              <div>
+                <h2>Store Inventory</h2>
+                <p className="subtitle">Manage your UrStore products and catalog.</p>
+              </div>
+              <button className="btn-primary" onClick={() => setIsModalOpen(true)}>
+                <span className="plus-icon">+</span> Add Product
               </button>
             </div>
-          ) : (
-            <div className="products-grid">
-              {products.map((product) => (
-                <div key={product.id} className="product-card" style={productCardStyles}>
-                  {/* Inline style for the product image background color */}
-                  <div className="product-image-container" style={{ backgroundColor: productImageBgColor }}>
-                    <img src={product.imageUrl} alt={product.name} />
-                  </div>
-                  <div className="product-info">
-                    <h3 style={{ color: productNameColor, fontFamily: productNameFontFamily }}>
-                      {product.name}
-                    </h3>
-                    <div className="price-tag">
-                      <span className="price" style={{ color: productPriceColor }}>
-                        {product.price.toFixed(2)} MAD
-                      </span>
+
+            {/* Products Grid */}
+            {products.length === 0 ? (
+              <div className="empty-state">
+                <div className="empty-icon">🛍️</div>
+                <h3>Your store is looking a bit empty</h3>
+                <p>Add your first product to start building your catalog.</p>
+                <button className="btn-secondary mt-3" onClick={() => setIsModalOpen(true)}>
+                  Add First Product
+                </button>
+              </div>
+            ) : (
+              <div className="products-grid">
+                {products.map((product) => (
+                  <div key={product.id} className="product-card" style={productCardStyles}>
+                    {/* Inline style for the product image background color */}
+                    <div className="product-image-container" style={{ backgroundColor: productImageBgColor }}>
+                      <img src={product.imageUrl} alt={product.name} />
+                      {/* Actions Section */}
+                      <div className="product-actions">
+                        <button className="action-btn edit-btn" onClick={() => handleEditProduct(product)}>
+                          <img src={editIcon} alt="Edit" />
+                        </button>
+                        <button className="action-btn delete-btn" onClick={() => handleDeleteProduct(product.id)}>
+                          <img src={deleteIcon} alt="Delete" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="product-info">
+                      <h3 style={{ color: productNameColor, fontFamily: productNameFontFamily }}>
+                        {product.name}
+                      </h3>
+                      <div className="price-tag">
+                        <span className="price" style={{ color: productPriceColor }}>
+                          {product.price.toFixed(2)} MAD
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* --- MOVED BUTTON CONTAINER --- */}
+          <div className="save-store-btn-container" style={{ marginTop: '2rem' }}>
+            {isStyleFormLocked ? (
+              <center>
+                <button className='save-store-btn unlock-btn' type="button" onClick={handleUnlockStyleForm}>
+                  Add Style to Your Store
+                </button>
+              </center>
+            ) : (
+              <Link to="/contact-step">
+                <center>
+                  <button className='save-store-btn' type="button">
+                    Save store and Continue
+                  </button>
+                </center>
+              </Link>
+            )}
+          </div>
+          
         </div>
 
         {/* --- Right: Customization Form (Style Panel) --- */}
@@ -258,32 +325,18 @@ export default function StoreStep() {
               <span>Locked. Click "Add Style to Your Store" below to edit.</span>
             </div>
           )}
+          
         </div>
       </div>
-<div className="save-store-btn-container">
-        {isStyleFormLocked ? (
-          <center>
-            <button className='save-store-btn unlock-btn' type="button" onClick={handleUnlockStyleForm}>
-              Add Style to Your Store
-            </button>
-          </center>
-        ) : (
-          <Link to="/contact-step">
-            <center>
-              <button className='save-store-btn' type="button">
-                Save store and Continue
-              </button>
-            </center>
-          </Link>
-        )}
-      </div>
 
-      {/* --- Existing Add Product Modal --- */}
+      
+
+      {/* --- Re-worked Product Modal (Handles Add and Edit) --- */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>Add New Product</h3>
+              <h3>{editingProduct ? 'Edit Product' : 'Add New Product'}</h3>
               <button className="close-btn" onClick={closeModal}>&times;</button>
             </div>
             
@@ -325,7 +378,7 @@ export default function StoreStep() {
                     id="productImage"
                     accept="image/*"
                     onChange={handleImageChange}
-                    required={!imagePreview}
+                    required={!imagePreview} /* File required only when adding, not editing */
                   />
                 </div>
                 {imagePreview && (
@@ -340,7 +393,7 @@ export default function StoreStep() {
                   Cancel
                 </button>
                 <button type="submit" className="btn-primary">
-                  Publish Product
+                  {editingProduct ? 'Save Changes' : 'Publish Product'}
                 </button>
               </div>
             </form>
@@ -350,9 +403,6 @@ export default function StoreStep() {
         </div>
         
       )}
-
-      {/* --- Re-worked Save Store Button with dynamic logic --- */}
-      
 
     </div>
   );

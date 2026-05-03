@@ -375,7 +375,8 @@ function FinalPreview() {
 
       {/* BARRE DU BUILDER MODIFIÉE POUR INCLURE LE BOUTON DEPLOY */}
       <div style={{ padding: "20px 5%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, zIndex: 1000 }}>
-        <h2 style={{ margin: 0, color: "#1e293b" }}>Final Step: Your Store Preview</h2>
+        <h2 style={{ margin: 0, color: "#1e293b" }}></h2>
+        <h1 className="heroTitle"><span>Final Step:</span> Your Store Preview</h1>
         <div style={{ display: "flex", gap: "15px" }}>
           <button 
             onClick={handleDownload}

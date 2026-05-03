@@ -98,7 +98,7 @@ function HeroStep() {
         }}
       >
         <div className="hero-paragraphe">
-          <h1 style={{ fontFamily: titleFont, color: heroTitleColor }}>
+          <h1 style={{ fontFamily: titleFont, color: heroTitleColor }}>     
            {heroTitle}
           </h1>
           <h2 style={{ fontFamily: subtitleFont, color: subheroTitleColor }}>
@@ -130,7 +130,7 @@ function HeroStep() {
         <input 
           type="range" 
           id="hero-img-width" 
-          min="10" max="100" 
+          min="80" max="150" 
           value={heroImgWidth} 
           onChange={(e) => setheroImgWidth(e.target.value)} 
         />
