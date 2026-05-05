@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./HeroStep.css";
 import heroImg from "../../images/urStoreHeroImg.png";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ function HeroStep() {
   
   // Colors
   const [heroBgColor, setheroBgColor] = useState(data.heroBgColor || "#ffffff");
-  const [heroBorderColor, setheroBorderColor] = useState(data.heroBorderColor || "#e2e8f0");
+  const [heroBorderColor] = useState(data.heroBorderColor || "#e2e8f0");
   const [heroTitleColor, setheroTitleColor] = useState(data.heroTitleColor || "#1f2937");
   const [subheroTitleColor, setSubheroTitleColor] = useState(data.subheroTitleColor || "#4f46e5");
   const [descColor, setDescColor] = useState(data.descColor || "#4b5563");
@@ -76,8 +76,8 @@ function HeroStep() {
   }, [heroDescription]);
 
   // --- 2. Handlers ---
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file) {
       // Creates a temporary URL to display the uploaded image
       setCurrentImage(URL.createObjectURL(file));

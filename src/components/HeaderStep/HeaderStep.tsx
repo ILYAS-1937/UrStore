@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './HeaderStep.css';
 import urStoreheaderLogo from "../../images/urStoreLogo.png";
 // We changed Link to useNavigate to control exactly when the user changes pages
@@ -15,7 +15,7 @@ function HeaderStep() {
   // State Variables
   const [headerLogo, setheaderLogo] = useState(data.headerLogo || urStoreheaderLogo);
   const [headerBgColor, setheaderBgColor] = useState(data.headerBgColor || '#ffffff');
-  const [headerBorderColor, setheaderBorderColor] = useState(data.headerBorderColor || '#e2e8f0');
+  const [headerBorderColor] = useState(data.headerBorderColor || '#e2e8f0');
   const [headerHeight, setHeaderHeight] = useState(data.headerHeight || '');
   const [navLinkColor, setNavLinkColor] = useState(data.navLinkColor || '#444');
   const [headerLogoWidth, setheaderLogoWidth] = useState(data.headerLogoWidth || 100);
