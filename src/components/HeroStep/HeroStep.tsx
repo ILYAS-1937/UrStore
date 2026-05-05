@@ -31,49 +31,49 @@ function HeroStep() {
 
   useEffect(() => {
     setField("currentImage", currentImage);
-  }, [currentImage]);
+  }, [setField, currentImage]);
   useEffect(() => {
     setField("heroImgWidth", heroImgWidth);
-  }, [heroImgWidth]);
+  }, [setField, heroImgWidth]);
   useEffect(() => {
     setField("titleFont", titleFont);
-  }, [titleFont]);
+  }, [setField, titleFont]);
   useEffect(() => {
     setField("subtitleFont", subtitleFont);
-  }, [subtitleFont]); 
+  }, [setField, subtitleFont]); 
   useEffect(() => {
     setField("paragraphFont", paragraphFont);
-  }, [paragraphFont]);
+  }, [setField, paragraphFont]);
   useEffect(() => {
     setField("heroBgColor", heroBgColor);
-  }, [heroBgColor]);
+  }, [setField, heroBgColor]);
   useEffect(() => {
     setField("heroBorderColor", heroBorderColor);
-  } , [heroBorderColor]);
+  }, [setField, heroBorderColor]);
   useEffect(() => {
     setField("heroTitleColor", heroTitleColor);
-  }, [heroTitleColor]);
+  }, [setField, heroTitleColor]);
   useEffect(() => {
     setField("subheroTitleColor", subheroTitleColor);
-  }, [subheroTitleColor]);
+  }, [setField, subheroTitleColor]);
   useEffect(() => {
     setField("descColor", descColor);
-  }, [descColor]);  
+  }, [setField, descColor]);  
   useEffect(() => {
     setField("heroBtnColor", heroBtnColor);
-  }, [heroBtnColor]);
+  }, [setField, heroBtnColor]);
   useEffect(() => {
     setField("heroBtnTextColor", heroBtnTextColor);
-  }, [heroBtnTextColor]);
+  }, [setField, heroBtnTextColor]);
   useEffect(() => {
     setField("heroTitle", heroTitle);
-  }, [heroTitle]);
+  }, [setField, heroTitle]);
   useEffect(() => {
     setField("heroSubtitle", heroSubtitle);
-  }, [heroSubtitle]);
+  }, [setField, heroSubtitle]);
   useEffect(() => {
     setField("heroDescription", heroDescription);
-  }, [heroDescription]);
+  }, [setField, heroDescription]);
 
   // --- 2. Handlers ---
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,73 +1,37 @@
-# React + TypeScript + Vite
+# 🛒 UrStore - E-commerce Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Un générateur de boutiques en ligne interactif, performant et 100% personnalisable.
 
-Currently, two official plugins are available:
+**🌍 [Voir le projet en ligne](https://urstores.netlify.app/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📝 À propos du projet
+UrStore est une application SaaS permettant de créer et de prévisualiser une boutique en ligne via un système de Canvas interactif. 
 
-## React Compiler
+Ce projet a été développé dans le cadre du module de gestion de projet (1ère année du Cycle Ingénieur à l'ENSA Berrechid). Il met en pratique des concepts avancés de développement frontend et applique rigoureusement la méthodologie agile Scrum (via Jira).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Fonctionnalités Principales
+* **Setup Wizard :** Assistant de configuration pour générer un thème (couleurs, typographie) adapté au secteur d'activité (Mode, Tech, Food, etc.).
+* **Canvas Interactif :** Interface fluide pour organiser les blocs UI (Hero, Grid, Contact).
+* **Properties Panel :** Panneau de contrôle connecté au Store pour une mise à jour des styles en temps réel.
+* **Sauvegarde Locale :** Persistance des données du brouillon via `localStorage` pour ne jamais perdre son travail.
+* **Responsive Design :** Module FinalPreview offrant un rendu fidèle et isolé sur Desktop et Mobile.
 
-## Expanding the ESLint configuration
+## 🛠️ Stack Technique
+* **Frontend :** React.js, TypeScript (Configuration stricte)
+* **Build Tool :** Vite
+* **State Management :** Zustand
+* **Styling :** CSS Modules (Isolation stricte pour éviter les fuites de style)
+* **Déploiement Continu (CI/CD) :** Netlify
+* **Gestion de projet :** Jira Software
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Lancement en local
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Si vous souhaitez faire tourner le projet sur votre machine :
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Cloner le dépôt :
+   ```bash
+   git clone [https://github.com/ilyas-1937/urstore.git](https://github.com/ilyas-1937/urstore.git)
+  
+## 👨‍💻 Équipe de Développement
+* **Ilyas Tarzi** - *Élève Ingénieur (1ère année Cycle Ingénieur)*
+* **Moataz mohamed** - *Élève Ingénieur (1ère année Cycle Ingénieur)*
