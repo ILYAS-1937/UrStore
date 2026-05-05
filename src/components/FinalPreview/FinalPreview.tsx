@@ -298,7 +298,7 @@ function FinalPreview() {
       formData.append('storeZip', contentBlob, 'store.zip');
 
       // 3. Send to Node.js Backend
-      const response = await fetch(`http://localhost:3000/api/deploy?name=${siteName}`, {
+     const response = await fetch(`https://ur-store-91fp.vercel.app/api/deploy?name=${siteName}`, {
         method: 'POST',
         body: formData, 
       });
