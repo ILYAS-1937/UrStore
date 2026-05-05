@@ -1,80 +1,61 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import cors from 'cors';
 import multer from 'multer';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import cors from 'cors';
 
-// Load the secret token from the .env file
 dotenv.config();
 
 const app = express();
 
-// Allow your Vite frontend to talk to this backend
+// 1. Enable CORS so your Netlify frontend can talk to this backend
 app.use(cors());
 
-// Use memory storage so the ZIP file doesn't save to your hard drive
+// 2. Configure multer to store the uploaded ZIP file in memory temporarily
 const upload = multer({ storage: multer.memoryStorage() });
 
-// The endpoint your React app will call
-app.post('/api/deploy', upload.single('storeZip'), async (req: Request, res: Response): Promise<void> => {
+// 3. The Deployment Route
+app.post('/api/deploy', upload.single('storeZip'), async (req, res): Promise<any> => {
   try {
-    // 1. Safety check: Did the file actually arrive?
-    if (!req.file) {
-      res.status(400).json({ success: false, message: 'No ZIP file was uploaded.' });
-      return;
+    const siteName = req.query.name as string;
+    const fileBuffer = req.file?.buffer;
+
+    if (!fileBuffer) {
+      return res.status(400).json({ success: false, message: 'No zip file provided' });
     }
 
-    const zipBuffer = req.file.buffer;
-    const netlifyToken = process.env.NETLIFY_TOKEN;
-
-    // 2. Safety check: Is the token missing?
-    if (!netlifyToken) {
-      res.status(500).json({ success: false, message: 'Server configuration error: Missing Netlify token.' });
-      return;
-    }
-
-    // 3. Grab the requested site name from the query parameters (e.g., ?name=my-store)
-    const customSiteName = req.query.name;
-    const netlifyApiUrl = customSiteName 
-      ? `https://api.netlify.com/api/v1/sites?name=${customSiteName}` 
-      : 'https://api.netlify.com/api/v1/sites';
-
-    // 4. Send the ZIP to Netlify
+    // Send the ZIP file buffer directly to Netlify's API
     const response = await axios.post(
-      netlifyApiUrl,
-      zipBuffer,
+      `https://api.netlify.com/api/v1/sites`,
+      fileBuffer,
       {
         headers: {
           'Content-Type': 'application/zip',
-          'Authorization': `Bearer ${netlifyToken}`
+          'Authorization': `Bearer ${process.env.NETLIFY_TOKEN}` // Uses your token
+        },
+        params: {
+          name: siteName // Netlify will try to use this exact name for the subdomain
         }
       }
     );
 
-    // 5. Grab the live URL from Netlify's response
-    const liveUrl = response.data.ssl_url;
-
-    // 6. Send it back to the React frontend
-    res.status(200).json({
+    // If successful, send the live URL back to the React frontend
+    res.json({
       success: true,
-      liveUrl: liveUrl
+      liveUrl: response.data.ssl_url || response.data.url
     });
 
   } catch (error: any) {
-    // If Netlify throws an error (like "name already taken"), we catch it here
-    const errorMessage = error.response?.data?.message || error.message;
-    console.error('Deployment error:', errorMessage);
-    
-    // We send a 400 error back to the frontend with the specific message so the user knows what happened
-    res.status(400).json({ 
-        success: false, 
-        message: errorMessage 
+    console.error('Deployment error:', error.response?.data || error.message);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to deploy to Netlify. The name might be taken or the token is invalid.' 
     });
   }
 });
 
-// Start the server
-const PORT = 3000;
+// 4. Listen on the dynamic port provided by the host (like Render)
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 UrStore TypeScript Server running on http://localhost:${PORT}`);
+    console.log(`Backend server running on port ${PORT}`);
 });
