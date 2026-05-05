@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import './StoreStep.css';
+import styles from './StoreStep.module.css'; // Changed to CSS Module import
 import useStore from '../../useStore';
 
 // Assuming these images exist in the same directory as this file
@@ -150,58 +150,58 @@ export default function StoreStep() {
   };
 
   return (
-    <div className="store-step-wrapper">
+    <div className={styles['store-step-wrapper']}>
       
-      <div className="store-step-layout">  
+      <div className={styles['store-step-layout']}>  
         
         {/* --- NEW LEFT COLUMN WRAPPER --- */}
-        <div className="store-left-column">
-                <h1 className="heroTitle"><span>Step3:</span> Customize Your Store</h1>
+        <div className={styles['store-left-column']}>
+          <h1 className={styles.heroTitle}><span>Step3:</span> Customize Your Store</h1>
           {/* Left: Store Inventory & Grid */}
-          <div className="store-inventory-wrapper" style={inventoryWrapperStyles}>
-            <div className="store-header">
+          <div className={styles['store-inventory-wrapper']} style={inventoryWrapperStyles}>
+            <div className={styles['store-header']}>
               <div>
                 <h2>Store Inventory</h2>
-                <p className="subtitle">Manage your UrStore products and catalog.</p>
+                <p className={styles.subtitle}>Manage your UrStore products and catalog.</p>
               </div>
-              <button className="btn-primary" onClick={() => setIsModalOpen(true)}>
-                <span className="plus-icon">+</span> Add Product
+              <button className={styles['btn-primary']} onClick={() => setIsModalOpen(true)}>
+                <span className={styles['plus-icon']}>+</span> Add Product
               </button>
             </div>
 
             {/* Products Grid */}
             {products.length === 0 ? (
-              <div className="empty-state">
-                <div className="empty-icon">🛍️</div>
+              <div className={styles['empty-state']}>
+                <div className={styles['empty-icon']}>🛍️</div>
                 <h3>Your store is looking a bit empty</h3>
                 <p>Add your first product to start building your catalog.</p>
-                <button className="btn-secondary mt-3" onClick={() => setIsModalOpen(true)}>
+                <button className={`${styles['btn-secondary']} ${styles['mt-3']}`} onClick={() => setIsModalOpen(true)}>
                   Add First Product
                 </button>
               </div>
             ) : (
-              <div className="products-grid">
+              <div className={styles['products-grid']}>
                 {products.map((product) => (
-                  <div key={product.id} className="product-card" style={productCardStyles}>
+                  <div key={product.id} className={styles['product-card']} style={productCardStyles}>
                     {/* Inline style for the product image background color */}
-                    <div className="product-image-container" style={{ backgroundColor: productImageBgColor }}>
+                    <div className={styles['product-image-container']} style={{ backgroundColor: productImageBgColor }}>
                       <img src={product.imageUrl} alt={product.name} />
                       {/* Actions Section */}
-                      <div className="product-actions">
-                        <button className="action-btn edit-btn" onClick={() => handleEditProduct(product)}>
+                      <div className={styles['product-actions']}>
+                        <button className={`${styles['action-btn']} ${styles['edit-btn']}`} onClick={() => handleEditProduct(product)}>
                           <img src={editIcon} alt="Edit" />
                         </button>
-                        <button className="action-btn delete-btn" onClick={() => handleDeleteProduct(product.id)}>
+                        <button className={`${styles['action-btn']} ${styles['delete-btn']}`} onClick={() => handleDeleteProduct(product.id)}>
                           <img src={deleteIcon} alt="Delete" />
                         </button>
                       </div>
                     </div>
-                    <div className="product-info">
+                    <div className={styles['product-info']}>
                       <h3 style={{ color: productNameColor, fontFamily: productNameFontFamily }}>
                         {product.name}
                       </h3>
-                      <div className="price-tag">
-                        <span className="price" style={{ color: productPriceColor }}>
+                      <div className={styles['price-tag']}>
+                        <span className={styles.price} style={{ color: productPriceColor }}>
                           {product.price.toFixed(2)} MAD
                         </span>
                       </div>
@@ -213,17 +213,17 @@ export default function StoreStep() {
           </div>
 
           {/* --- MOVED BUTTON CONTAINER --- */}
-          <div className="save-store-btn-container" style={{ marginTop: '2rem' }}>
+          <div className={styles['save-store-btn-container']} style={{ marginTop: '2rem' }}>
             {isStyleFormLocked ? (
               <center>
-                <button className='save-store-btn unlock-btn' type="button" onClick={handleUnlockStyleForm}>
+                <button className={`${styles['save-store-btn']} ${styles['unlock-btn']}`} type="button" onClick={handleUnlockStyleForm}>
                   Add Style to Your Store
                 </button>
               </center>
             ) : (
               <Link to="/contact-step">
                 <center>
-                  <button className='save-store-btn' type="button">
+                  <button className={styles['save-store-btn']} type="button">
                     Save store and Continue
                   </button>
                 </center>
@@ -234,14 +234,14 @@ export default function StoreStep() {
         </div>
 
         {/* --- Right: Customization Form (Style Panel) --- */}
-        <div className={`store-customization-panel ${isStyleFormLocked ? 'is-locked' : ''}`}>
+        <div className={`${styles['store-customization-panel']} ${isStyleFormLocked ? styles['is-locked'] : ''}`}>
           <h3>🎨 Store Styling</h3>
           <form onSubmit={handleSubmitStyle}>
             
             {/* UPDATED: Product Background Color */}
            
 
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="inventoryBgColor">Inventory Container Background Color:</label>
               <input 
                 type="color" 
@@ -249,10 +249,10 @@ export default function StoreStep() {
                 value={inventoryBgColor} 
                 onChange={(e) => setInventoryBgColor(e.target.value)}
                 disabled={isStyleFormLocked}
-                className="color-picker-custom"
+                className={styles['color-picker-custom']}
               />
             </div>
-             <div className="form-group">
+             <div className={styles['form-group']}>
               <label htmlFor="productImageBgColor">Change product background color:</label>
               <input 
                 type="color" 
@@ -260,11 +260,11 @@ export default function StoreStep() {
                 value={productImageBgColor} 
                 onChange={(e) => setProductImageBgColor(e.target.value)}
                 disabled={isStyleFormLocked}
-                className="color-picker-custom"
+                className={styles['color-picker-custom']}
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="productCardBgColor">Product Card Background Color:</label>
               <input 
                 type="color" 
@@ -272,11 +272,11 @@ export default function StoreStep() {
                 value={productCardBgColor} 
                 onChange={(e) => setProductCardBgColor(e.target.value)}
                 disabled={isStyleFormLocked}
-                className="color-picker-custom"
+                className={styles['color-picker-custom']}
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="productNameColor">Product Name Color:</label>
               <input 
                 type="color" 
@@ -284,11 +284,11 @@ export default function StoreStep() {
                 value={productNameColor} 
                 onChange={(e) => setProductNameColor(e.target.value)}
                 disabled={isStyleFormLocked}
-                className="color-picker-custom"
+                className={styles['color-picker-custom']}
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="productNameFontFamily">Product Name Font:</label>
               <select 
                 id="productNameFontFamily" 
@@ -302,7 +302,7 @@ export default function StoreStep() {
               </select>
             </div>
 
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <label htmlFor="productPriceColor">Product Price Color:</label>
               <input 
                 type="color" 
@@ -310,18 +310,18 @@ export default function StoreStep() {
                 value={productPriceColor} 
                 onChange={(e) => setProductPriceColor(e.target.value)}
                 disabled={isStyleFormLocked}
-                className="color-picker-custom"
+                className={styles['color-picker-custom']}
               />
             </div>
 
-            <button type="submit" className="btn-success mt-4" disabled={isStyleFormLocked}>
+            <button type="submit" className={`${styles['btn-success']} ${styles['mt-4']}`} disabled={isStyleFormLocked}>
               Save Style
             </button>
             
           </form>
           
           {isStyleFormLocked && (
-            <div className="lock-overlay">
+            <div className={styles['lock-overlay']}>
               <span>Locked. Click "Add Style to Your Store" below to edit.</span>
             </div>
           )}
@@ -333,15 +333,15 @@ export default function StoreStep() {
 
       {/* --- Re-worked Product Modal (Handles Add and Edit) --- */}
       {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
+        <div className={styles['modal-overlay']} onClick={closeModal}>
+          <div className={styles['modal-content']} onClick={(e) => e.stopPropagation()}>
+            <div className={styles['modal-header']}>
               <h3>{editingProduct ? 'Edit Product' : 'Add New Product'}</h3>
-              <button className="close-btn" onClick={closeModal}>&times;</button>
+              <button className={styles['close-btn']} onClick={closeModal}>&times;</button>
             </div>
             
             <form onSubmit={handleSubmitProduct}>
-              <div className="form-group">
+              <div className={styles['form-group']}>
                 <label htmlFor="productName">Product Name</label>
                 <input
                   type="text"
@@ -353,9 +353,9 @@ export default function StoreStep() {
                 />
               </div>
 
-              <div className="form-group">
+              <div className={styles['form-group']}>
                 <label htmlFor="productPrice">Price (MAD)</label>
-                <div className="input-with-currency">
+                <div className={styles['input-with-currency']}>
                   <input
                     type="number"
                     id="productPrice"
@@ -366,13 +366,13 @@ export default function StoreStep() {
                     step="0.01"
                     required
                   />
-                  <span className="currency-suffix">MAD</span>
+                  <span className={styles['currency-suffix']}>MAD</span>
                 </div>
               </div>
 
-              <div className="form-group">
+              <div className={styles['form-group']}>
                 <label htmlFor="productImage">Product Image</label>
-                <div className="file-upload-wrapper">
+                <div className={styles['file-upload-wrapper']}>
                   <input
                     type="file"
                     id="productImage"
@@ -382,17 +382,17 @@ export default function StoreStep() {
                   />
                 </div>
                 {imagePreview && (
-                  <div className="image-preview-container">
-                    <img src={imagePreview} alt="Preview" className="image-preview" />
+                  <div className={styles['image-preview-container']}>
+                    <img src={imagePreview} alt="Preview" className={styles['image-preview']} />
                   </div>
                 )}
               </div>
 
-              <div className="modal-actions">
-                <button type="button" className="btn-ghost" onClick={closeModal}>
+              <div className={styles['modal-actions']}>
+                <button type="button" className={styles['btn-ghost']} onClick={closeModal}>
                   Cancel
                 </button>
-                <button type="submit" className="btn-primary">
+                <button type="submit" className={styles['btn-primary']}>
                   {editingProduct ? 'Save Changes' : 'Publish Product'}
                 </button>
               </div>

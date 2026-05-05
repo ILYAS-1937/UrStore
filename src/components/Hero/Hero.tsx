@@ -1,11 +1,11 @@
-import "./Hero.css"; // Don't forget to import the CSS!
+import styles from "./Hero.module.css"; // Changed to import CSS Module
 import heroImg from "../../images/heroImg.png";
 import { Link } from "react-router-dom";
 
 function Hero() {
   return (
-    <section className="hero">
-      <div className="heroParagraphe">
+    <section className={styles.hero}>
+      <div className={styles.heroParagraphe}>
         <h1>Build Your Dream Store. No Code, No Limits.</h1>
         <h2>Your one-stop shop for all your needs!</h2>
         <p>
@@ -14,11 +14,11 @@ function Hero() {
           Your business deserves a beautiful home.
         </p>
         <Link to="/setup-wizard">
-  <button className="cta-button">Start Building Free</button>
-</Link>
+          <button className={styles['cta-button']}>Start Building Free</button>
+        </Link>
       </div>
       
-      <div className="heroImage">
+      <div className={styles.heroImage}>
         <img src={heroImg} alt="Platform Preview" />
       </div>
     </section>

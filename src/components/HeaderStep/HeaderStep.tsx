@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './HeaderStep.css';
+import styles from './HeaderStep.module.css'; // Changed to CSS Module import
 import urStoreheaderLogo from "../../images/urStoreLogo.png";
 // We changed Link to useNavigate to control exactly when the user changes pages
 import { useNavigate } from 'react-router-dom'; 
@@ -51,12 +51,12 @@ function HeaderStep() {
   };
 
   return (
-    <div className="header-step" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+    <div className={styles['header-step']} style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
       <div style={{ width: '100%' }}>
         <h1><span>Step 1:</span> Customize Your Store Header</h1>
       </div>
       
-      <div className="header-container" style={headerStyles}>
+      <div className={styles['header-container']} style={headerStyles}>
         <img src={headerLogo} alt="UrStore headerLogo" style={{ height: `${headerLogoWidth}px`, transition: 'height 0.2s ease' }} />
         <ul>
           <li><a href="#home" style={{ color: navLinkColor }}>Home</a></li>
@@ -66,7 +66,7 @@ function HeaderStep() {
         </ul>
       </div>
 
-      <form className="header-form" style={{ width: '30%' }} onSubmit={handleSubmit}>
+      <form className={styles['header-form']} style={{ width: '30%' }} onSubmit={handleSubmit}>
 
         <label htmlFor="store-headerLogo">Import your store headerLogo:</label>
         <input type="file" id="store-headerLogo" accept='image/*' onChange={handleheaderLogoChange} />
@@ -82,10 +82,10 @@ function HeaderStep() {
         />
         
         <label htmlFor="back-color">Header background-color:</label>
-        <input type='color' id="back-color" className='color-picker-custom' value={headerBgColor} onChange={(e) => setheaderBgColor(e.target.value)}/>
+        <input type='color' id="back-color" className={styles['color-picker-custom']} value={headerBgColor} onChange={(e) => setheaderBgColor(e.target.value)}/>
         
         <label htmlFor="nav-links-color">Navigation links color:</label>
-        <input type='color' className='color-picker-custom' id="nav-links-color" value={navLinkColor} onChange={(e) => setNavLinkColor(e.target.value)}/>
+        <input type='color' className={styles['color-picker-custom']} id="nav-links-color" value={navLinkColor} onChange={(e) => setNavLinkColor(e.target.value)}/>
         
         <label htmlFor="header-height">Header height (in px):</label>
         <input 

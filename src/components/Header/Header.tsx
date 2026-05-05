@@ -1,12 +1,13 @@
 import logo from '../../images/logo.png';
-import './Header.css'; // Make sure to import the CSS file
+import styles from './Header.module.css'; // Updated to import CSS Module
 import { Link } from 'react-router-dom';
+
 function Header() {
   return (
-    <header className="header">
-      <img className="logo" src={logo} alt="Logo" />
+    <header className={styles.header}>
+      <img className={styles.logo} src={logo} alt="Logo" />
       
-      <nav className="nav-links">
+      <nav className={styles['nav-links']}>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
@@ -14,9 +15,9 @@ function Header() {
         </ul>
       </nav>
 
-     <Link to="/setup-wizard">
-  <button className="cta-button">Start Now</button>
-</Link>
+      <Link to="/setup-wizard">
+        <button className={styles['cta-button']}>Start Now</button>
+      </Link>
     </header>
   );
 }

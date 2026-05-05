@@ -423,3 +423,19 @@ textarea.hero-input-custom {
     padding: 20px;
   }
 }
+.color-picker-custom {
+  padding: 0.2rem !important;
+  height: 40px !important;
+  width: 100% !important;
+  border-radius: 5px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.color-picker-custom::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.color-picker-custom::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
+}

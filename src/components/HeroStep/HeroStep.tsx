@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./HeroStep.css";
+import styles from "./HeroStep.module.css"; // Changed to CSS Module import
 import heroImg from "../../images/urStoreHeroImg.png";
 import { Link } from "react-router-dom";
 import useStore from "../../useStore";
@@ -85,15 +85,15 @@ function HeroStep() {
   };
 
   return (
-    <div className="all">
-      <div className="hero-step">
+    <div className={styles.all}>
+      <div className={styles['hero-step']}>
         
         {/* LEFT SECTION: Contains both the Title and the Hero Container */}
-        <div className="hero-left-wrapper">
-          <h1 className="heroTitle"><span>Step2:</span> Customize Your Store Hero</h1>
+        <div className={styles['hero-left-wrapper']}>
+          <h1 className={styles.heroTitle}><span>Step2:</span> Customize Your Store Hero</h1>
           
           <div 
-            className="hero-container"
+            className={styles['hero-container']}
             style={{ 
               backgroundColor: heroBgColor, 
               borderColor: heroBorderColor,
@@ -101,7 +101,7 @@ function HeroStep() {
               borderWidth: "2px"
             }}
           >
-            <div className="hero-paragraphe">
+            <div className={styles['hero-paragraphe']}>
               <h1 style={{ fontFamily: titleFont, color: heroTitleColor }}>     
                {heroTitle}
               </h1>
@@ -112,14 +112,14 @@ function HeroStep() {
                {heroDescription}
               </p>
               <button 
-                className="hero-button"
+                className={styles['hero-button']}
                 style={{ backgroundColor: heroBtnColor, color: heroBtnTextColor }}
               >
                 View Menu Now
               </button>
             </div>
 
-            <div className="hero-image">
+            <div className={styles['hero-image']}>
               <img 
                 src={currentImage} 
                 alt="Platform Preview" 
@@ -130,7 +130,7 @@ function HeroStep() {
         </div>
 
         {/* RIGHT SECTION: Form */}
-        <form className="hero-form" onSubmit={(e) => e.preventDefault()}>
+        <form className={styles['hero-form']} onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="hero-img">Import your store hero image:</label>
           <input type="file" id="hero-img" accept="image/*" onChange={handleImageChange} />
           
@@ -145,7 +145,7 @@ function HeroStep() {
           
           <label htmlFor="hero-title">type your store hero title:</label>
           <input 
-            className="hero-input-custom"
+            className={styles['hero-input-custom']}
             type="text" 
             id="hero-title" 
             value={heroTitle} 
@@ -154,7 +154,7 @@ function HeroStep() {
 
           <label htmlFor="hero-subtitle">type your store hero subtitle:</label>
           <input 
-            className="hero-input-custom"
+            className={styles['hero-input-custom']}
             type="text" 
             id="hero-subtitle" 
             value={heroSubtitle} 
@@ -163,7 +163,7 @@ function HeroStep() {
 
           <label htmlFor="hero-paragraph">type your store hero description:</label>
           <textarea
-            className="hero-input-custom"
+            className={styles['hero-input-custom']}
             id="hero-paragraph" 
             value={heroDescription} 
             onChange={(e) => setHeroDescription(e.target.value)} 
@@ -259,22 +259,22 @@ function HeroStep() {
           </select>
 
           <label htmlFor="back-color">Hero background-color:</label>
-          <input type="color" className='color-picker-custom' value={heroBgColor} onChange={(e) => setheroBgColor(e.target.value)}/>
+          <input type="color" className={styles['color-picker-custom']} value={heroBgColor} onChange={(e) => setheroBgColor(e.target.value)}/>
           
           <label htmlFor="title-color">Title color:</label>
-          <input className='color-picker-custom' type="color" value={heroTitleColor} onChange={(e) => setheroTitleColor(e.target.value)}/>
+          <input className={styles['color-picker-custom']} type="color" value={heroTitleColor} onChange={(e) => setheroTitleColor(e.target.value)}/>
           
           <label htmlFor="subtitle-color">Subtitle color:</label>
-          <input className='color-picker-custom' type="color" value={subheroTitleColor} onChange={(e) => setSubheroTitleColor(e.target.value)}/>
+          <input className={styles['color-picker-custom']} type="color" value={subheroTitleColor} onChange={(e) => setSubheroTitleColor(e.target.value)}/>
           
           <label htmlFor="description-color">Description color:</label>
-          <input className='color-picker-custom' type="color" value={descColor} onChange={(e) => setDescColor(e.target.value)}/>
+          <input className={styles['color-picker-custom']} type="color" value={descColor} onChange={(e) => setDescColor(e.target.value)}/>
           
           <label htmlFor="hero-btn-color">Button color:</label>
-          <input className='color-picker-custom' type="color" value={heroBtnColor} onChange={(e) => setheroBtnColor(e.target.value)}/>
+          <input className={styles['color-picker-custom']} type="color" value={heroBtnColor} onChange={(e) => setheroBtnColor(e.target.value)}/>
           
           <label htmlFor="hero-btn-text-color">Button text color:</label>
-          <input className='color-picker-custom' type="color" value={heroBtnTextColor} onChange={(e) => setheroBtnTextColor(e.target.value)}/>
+          <input className={styles['color-picker-custom']} type="color" value={heroBtnTextColor} onChange={(e) => setheroBtnTextColor(e.target.value)}/>
           
           <Link to="/store-step"><button type="submit">Save Hero</button></Link>
         </form>

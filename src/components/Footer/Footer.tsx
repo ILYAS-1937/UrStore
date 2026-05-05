@@ -1,11 +1,11 @@
-import './Footer.css';
+import styles from './Footer.module.css';
 
 function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-content">
+    <footer className={styles.footer}>
+      <div className={styles['footer-content']}>
         {/* Section Marque / Description */}
-        <div className="footer-brand">
+        <div className={styles['footer-brand']}>
           <h2>UrStore</h2>
           <p>
             Build your dream store with zero code. Your business deserves a beautiful home, 
@@ -14,7 +14,7 @@ function Footer() {
         </div>
 
         {/* Section Liens Rapides */}
-        <div className="footer-links">
+        <div className={styles['footer-links']}>
           <h3>Quick Links</h3>
           <ul>
             <li><a href="/">Home</a></li>
@@ -25,7 +25,7 @@ function Footer() {
         </div>
 
         {/* Section Réseaux Sociaux */}
-        <div className="footer-social">
+        <div className={styles['footer-social']}>
           <h3>Follow Us</h3>
           <ul>
             <li><a href="#twitter">Twitter</a></li>
@@ -36,7 +36,7 @@ function Footer() {
       </div>
 
       {/* Barre de Copyright */}
-      <div className="footer-bottom">
+      <div className={styles['footer-bottom']}>
         <p>&copy; {new Date().getFullYear()} UrStore. All rights reserved.</p>
       </div>
     </footer>

@@ -164,3 +164,20 @@
     grid-template-columns: 1fr;
   }
 }
+.heroTitle {
+    margin-top: 10px;
+    font-size: 50px;
+    color: #2d3748;
+    padding: 5px;
+    font-weight: 700;
+    text-align: left; /* Changed to left */
+}
+
+.heroTitle span {
+    margin-top: 10px;
+    font-size: 50px;
+    color: #3261b2;
+    padding: 5px;
+    font-weight: 700;
+    text-align: left; /* Changed to left */
+}

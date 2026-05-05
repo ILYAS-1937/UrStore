@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../../useStore';
-import './SetupWizard.css';
+import styles from './SetupWizard.module.css'; // Changed to CSS Module import
 
 // 20 Standard Colors for the user to pick from
 const MAIN_COLORS = [
@@ -76,19 +76,19 @@ export default function SetupWizard() {
   const handleSkip = () => applyThemeAndNavigate([]); // Pass empty array to skip theming
 
   return (
-    <div className="wizard-overlay">
-      <div className="wizard-container">
-        <div className="wizard-header">
+    <div className={styles['wizard-overlay']}>
+      <div className={styles['wizard-container']}>
+        <div className={styles['wizard-header']}>
           <h2>Store Setup ({step}/3)</h2>
-          <div className="progress-bar">
-            <div className="progress-fill" style={{ width: `${(step / 3) * 100}%` }}></div>
+          <div className={styles['progress-bar']}>
+            <div className={styles['progress-fill']} style={{ width: `${(step / 3) * 100}%` }}></div>
           </div>
         </div>
 
-        <div className="wizard-body">
+        <div className={styles['wizard-body']}>
           {/* STEP 1 */}
           {step === 1 && (
-            <div className="wizard-step">
+            <div className={styles['wizard-step']}>
               <h3>What is the name of your store?</h3>
               <input 
                 type="text" 
@@ -102,7 +102,7 @@ export default function SetupWizard() {
 
           {/* STEP 2 */}
           {step === 2 && (
-            <div className="wizard-step">
+            <div className={styles['wizard-step']}>
               <h3>What is your store's profession or context?</h3>
               <select value={profession} onChange={(e) => setProfession(e.target.value)}>
                 <option value="">Select a category...</option>
@@ -117,16 +117,16 @@ export default function SetupWizard() {
 
           {/* STEP 3 */}
           {step === 3 && (
-            <div className="wizard-step">
+            <div className={styles['wizard-step']}>
               <h3>Choose your theme colors</h3>
               <p>Pick exactly 3 colors, or choose a suggested palette.</p>
               
               <h4>Individual Colors ({selectedColors.length}/3 selected)</h4>
-              <div className="color-grid">
+              <div className={styles['color-grid']}>
                 {MAIN_COLORS.map((color) => (
                   <div 
                     key={color} 
-                    className={`color-circle ${selectedColors.includes(color) ? 'selected' : ''}`}
+                    className={`${styles['color-circle']} ${selectedColors.includes(color) ? styles.selected : ''}`}
                     style={{ backgroundColor: color }}
                     onClick={() => toggleColor(color)}
                   ></div>
@@ -134,15 +134,15 @@ export default function SetupWizard() {
               </div>
 
               <h4>Suggested Palettes</h4>
-              <div className="palette-grid">
+              <div className={styles['palette-grid']}>
                 {PALETTES.map((palette, index) => (
                   <div 
                     key={index} 
-                    className="palette-row" 
+                    className={styles['palette-row']} 
                     onClick={() => selectPalette(palette)}
                   >
                     {palette.map((color, i) => (
-                      <div key={i} className="palette-color" style={{ backgroundColor: color }}></div>
+                      <div key={i} className={styles['palette-color']} style={{ backgroundColor: color }}></div>
                     ))}
                   </div>
                 ))}
@@ -151,20 +151,20 @@ export default function SetupWizard() {
           )}
         </div>
 
-        <div className="wizard-footer">
+        <div className={styles['wizard-footer']}>
           {step > 1 ? (
-            <button className="btn-back" onClick={handleBack}>Back</button>
+            <button className={styles['btn-back']} onClick={handleBack}>Back</button>
           ) : (
             <div></div> // Spacer
           )}
           
           <div>
-            {step === 3 && <button className="btn-skip" onClick={handleSkip}>Skip Theme</button>}
+            {step === 3 && <button className={styles['btn-skip']} onClick={handleSkip}>Skip Theme</button>}
             
             {step < 3 ? (
-              <button className="btn-next" onClick={handleNext} disabled={step === 1 && !storeName}>Next</button>
+              <button className={styles['btn-next']} onClick={handleNext} disabled={step === 1 && !storeName}>Next</button>
             ) : (
-              <button className="btn-submit" onClick={handleSubmit} disabled={selectedColors.length > 0 && selectedColors.length !== 3}>
+              <button className={styles['btn-submit']} onClick={handleSubmit} disabled={selectedColors.length > 0 && selectedColors.length !== 3}>
                 Start Building
               </button>
             )}

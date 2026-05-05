@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './FooterStep.css';
+import styles from './FooterStep.module.css'; // Changed to CSS Module import
 import useStore from '../../useStore';
 
 // Use your default logo here
@@ -43,42 +43,42 @@ function FooterStep() {
   };
 
   return (
-    <div className="footer-step-wrapper">
-      <h1 className="heroTitle"><span>Step 5:</span> Finalize Your Footer</h1>
+    <div className={styles['footer-step-wrapper']}>
+      <h1 className={styles.heroTitle}><span>Step 5:</span> Finalize Your Footer</h1>
       
-      <div className="footer-step-container">
+      <div className={styles['footer-step-container']}>
         {/* --- LIVE PREVIEW SECTION --- */}
-        <div className="footer-preview-area">
-          <div className="preview-label">Footer Preview</div>
+        <div className={styles['footer-preview-area']}>
+          <div className={styles['preview-label']}>Footer Preview</div>
           
-          <div className="footer-mockup-container">
+          <div className={styles['footer-mockup-container']}>
             <footer 
-              className="dynamic-footer-preview" 
+              className={styles['dynamic-footer-preview']} 
               style={{ 
                 backgroundColor: footerBgColor, 
                 color: footerTextColor,
                 borderTop: `1px solid ${footerTextColor}22` 
               }}
             >
-              <div className="footer-main-content">
+              <div className={styles['footer-main-content']}>
                 {/* Left: Logo + Description */}
-                <div className="footer-brand-side">
-                  <div className="footer-logo-wrapper">
+                <div className={styles['footer-brand-side']}>
+                  <div className={styles['footer-logo-wrapper']}>
                     <img 
                       src={footerLogo} 
                       alt="Logo" 
                       style={{ width: `${footerLogoWidth}px`, objectFit: 'contain' }} 
                     />
                   </div>
-                  <p className="footer-desc-text" style={{ color: footerTextColor }}>
+                  <p className={styles['footer-desc-text']} style={{ color: footerTextColor }}>
                     {footerDescription}
                   </p>
                 </div>
                 
                 {/* Right: Store Guarantees */}
-                <div className="footer-right-side">
+                <div className={styles['footer-right-side']}>
                   <h4 style={{ color: footerTextColor }}>{guaranteeTitle}</h4>
-                  <ul className="guarantees-list">
+                  <ul className={styles['guarantees-list']}>
                     <li style={{ color: footerTextColor }}>{guarantee1}</li>
                     <li style={{ color: footerTextColor }}>{guarantee2}</li>
                     <li style={{ color: footerTextColor }}>{guarantee3}</li>
@@ -87,7 +87,7 @@ function FooterStep() {
               </div>
 
               {/* Copyright Bar */}
-              <div className="footer-copyright-bar" style={{ borderTopColor: `${footerTextColor}22` }}>
+              <div className={styles['footer-copyright-bar']} style={{ borderTopColor: `${footerTextColor}22` }}>
                 <p>&copy; {new Date().getFullYear()} {storeName}. All rights reserved.</p>
               </div>
             </footer>
@@ -95,9 +95,9 @@ function FooterStep() {
         </div>
 
         {/* --- FORM SECTION --- */}
-        <form className="footer-form-panel" onSubmit={(e) => e.preventDefault()}>
+        <form className={styles['footer-form-panel']} onSubmit={(e) => e.preventDefault()}>
           
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label>Store Name (For Copyright)</label>
             <input 
               type="text" 
@@ -107,12 +107,12 @@ function FooterStep() {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label>Footer Logo</label>
-            <input type="file" accept="image/*" onChange={handleLogoChange} className="file-input" />
+            <input type="file" accept="image/*" onChange={handleLogoChange} className={styles['file-input']} />
           </div>
 
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label>Logo Width ({footerLogoWidth}px)</label>
             <input 
               type="range" min="50" max="300" 
@@ -121,7 +121,7 @@ function FooterStep() {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label>Short Brand Description</label>
             <textarea 
               value={footerDescription} 
@@ -131,7 +131,7 @@ function FooterStep() {
           </div>
 
           {/* Guarantees Inputs */}
-          <div className="form-group">
+          <div className={styles['form-group']}>
             <label>Guarantees Section Title</label>
             <input 
               type="text" 
@@ -140,31 +140,31 @@ function FooterStep() {
             />
           </div>
           
-          <div className="guarantees-inputs">
-            <div className="form-group">
+          <div className={styles['guarantees-inputs']}>
+            <div className={styles['form-group']}>
               <input type="text" value={guarantee1} onChange={(e) => setGuarantee1(e.target.value)} placeholder="Guarantee 1" />
             </div>
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <input type="text" value={guarantee2} onChange={(e) => setGuarantee2(e.target.value)} placeholder="Guarantee 2" />
             </div>
-            <div className="form-group">
+            <div className={styles['form-group']}>
               <input type="text" value={guarantee3} onChange={(e) => setGuarantee3(e.target.value)} placeholder="Guarantee 3" />
             </div>
           </div>
 
-          <div className="color-inputs">
-            <div className="color-field">
+          <div className={styles['color-inputs']}>
+            <div className={styles['color-field']}>
               <label>Background Color</label>
               <input type="color" value={footerBgColor} onChange={(e) => setFooterBgColor(e.target.value)} />
             </div>
-            <div className="color-field">
+            <div className={styles['color-field']}>
               <label>Text Color</label>
               <input type="color" value={footerTextColor} onChange={(e) => setFooterTextColor(e.target.value)} />
             </div>
           </div>
 
-          <Link to="/final-preview" className="finish-link">
-            <button className="complete-btn">Finish & Generate Store</button>
+          <Link to="/final-preview" className={styles['finish-link']}>
+            <button className={styles['complete-btn']}>Finish & Generate Store</button>
           </Link>
         </form>
       </div>

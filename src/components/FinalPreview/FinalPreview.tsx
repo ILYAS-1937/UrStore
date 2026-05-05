@@ -1,13 +1,13 @@
-import  { useState } from "react";
+import { useState } from "react";
 import useStore from "../../useStore";
 import JSZip from "jszip";
 
-// --- IMPORTATION STRICTE DE TES CSS ---
-import "../HeaderStep/HeaderStep.css"; 
-import "../HeroStep/HeroStep.css";
-import "../StoreStep/StoreStep.css"; 
-import "../ContactStep/ContactStep.css"; 
-import "../FooterStep/FooterStep.css";
+// --- IMPORTATION STRICTE DE TES CSS MODULES ---
+import headerStyles from "../HeaderStep/HeaderStep.module.css"; 
+import heroStyles from "../HeroStep/HeroStep.module.css";
+import storeStyles from "../StoreStep/StoreStep.module.css"; 
+import contactStyles from "../ContactStep/ContactStep.module.css"; 
+import footerStyles from "../FooterStep/FooterStep.module.css";
 
 function FinalPreview() {
   const { data } = useStore();
@@ -325,8 +325,8 @@ function FinalPreview() {
       
       <style>
         {`
-          .anti-gap-preview .header-container, 
-          .anti-gap-preview .hero-container { margin: 0 !important; position: static !important; top: auto !important; transform: none !important; }
+          .anti-gap-preview .${headerStyles['header-container']}, 
+          .anti-gap-preview .${heroStyles['hero-container']} { margin: 0 !important; position: static !important; top: auto !important; transform: none !important; }
         `}
       </style>
 
@@ -415,7 +415,7 @@ function FinalPreview() {
       {/* BARRE DU BUILDER MODIFIÉE POUR INCLURE LE BOUTON DEPLOY */}
       <div style={{ padding: "20px 5%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, zIndex: 1000 }}>
         <h2 style={{ margin: 0, color: "#1e293b" }}></h2>
-        <h1 className="heroTitle"><span>Final Step:</span> Your Store Preview</h1>
+        <h1 className={heroStyles.heroTitle}><span>Final Step:</span> Your Store Preview</h1>
         <div style={{ display: "flex", gap: "15px" }}>
           <button 
             onClick={handleDownload}
@@ -445,7 +445,7 @@ function FinalPreview() {
       {/* --- PREVIEW DU SITE --- */}
       <div className="anti-gap-preview" style={{ maxWidth: "1200px", margin: "40px auto", background: "#fff", boxShadow: "0 15px 35px rgba(0,0,0,0.1)", borderRadius: "10px", overflow: "hidden", display: "block" }}>
         
-        <div className="header-container" style={{ background: headerBgColor,border: headerBorderColor ? `2px solid ${headerBorderColor}` : "none" , height: headerHeight ? `${headerHeight}px` : undefined, width: "100%", boxSizing: "border-box" }}>
+        <div className={headerStyles['header-container']} style={{ background: headerBgColor,border: headerBorderColor ? `2px solid ${headerBorderColor}` : "none" , height: headerHeight ? `${headerHeight}px` : undefined, width: "100%", boxSizing: "border-box" }}>
           {data.headerLogo && <img src={data.headerLogo} alt="Logo" style={{ height: `${headerLogoWidth}px`, transition: 'height 0.2s ease' }} />}
           <ul style={{ margin: 0, padding: 0 }}>
             <li><a href="#home" style={{ color: navLinkColor }}>Home</a></li>
@@ -455,30 +455,30 @@ function FinalPreview() {
           </ul>
         </div>
 
-        <div className="hero-container" style={{ background: finalHeroBg, width: "100%", boxSizing: "border-box", overflow: "hidden", border: heroBorderColor ? `2px solid ${heroBorderColor}` : "none" }}>
-          <div className="hero-paragraphe">
+        <div className={heroStyles['hero-container']} style={{ background: finalHeroBg, width: "100%", boxSizing: "border-box", overflow: "hidden", border: heroBorderColor ? `2px solid ${heroBorderColor}` : "none" }}>
+          <div className={heroStyles['hero-paragraphe']}>
             <h1 style={{ fontFamily: titleFont, color: heroTitleColor, margin: "0 0 20px 0" }}>{heroTitle}</h1>
             <h2 style={{ fontFamily: subtitleFont, color: subheroTitleColor, margin: "0 0 25px 0" }}>{heroSubtitle}</h2>
             <p style={{ fontFamily: paragraphFont, color: descColor, margin: "0 0 35px 0" }}>{heroDescription}</p>
-            <button className="hero-button" style={{ backgroundColor: heroBtnColor, color: heroBtnTextColor }}>View Menu Now</button>
+            <button className={heroStyles['hero-button']} style={{ backgroundColor: heroBtnColor, color: heroBtnTextColor }}>View Menu Now</button>
           </div>
-          <div className="hero-image" style={{ maxWidth: "100%" }}>
+          <div className={heroStyles['hero-image']} style={{ maxWidth: "100%" }}>
             {data.currentImage && <img src={data.currentImage} alt="Hero" style={{ width: `${heroImgWidth}%`, maxWidth: "100%", objectFit: "cover" }} />}
           </div>
         </div>
 
         <div style={{ backgroundColor: inventoryBgColor, padding: "80px 5%", boxSizing: "border-box", width: "100%" }}>
           <h2 style={{ textAlign: "center", fontSize: "2.5rem", color: "#1e293b", margin: "0 0 50px 0", fontFamily: "sans-serif" }}>Nos Produits</h2>
-         <div className="products-grid" style={{ padding: 0, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "28px" }}>
+         <div className={storeStyles['products-grid']} style={{ padding: 0, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "28px" }}>
             {products.map((product: { id: string | number; imageUrl: string; name: string; price: number | string }) => (
-             <div key={product.id} className="product-card" style={{ backgroundColor: productCardBgColor, width: "280px" }}>
-                <div className="product-image-container" style={{ backgroundColor: productImageBgColor }}>
+             <div key={product.id} className={storeStyles['product-card']} style={{ backgroundColor: productCardBgColor, width: "280px" }}>
+                <div className={storeStyles['product-image-container']} style={{ backgroundColor: productImageBgColor }}>
                   <img src={product.imageUrl} alt={product.name} style={{ maxWidth: "100%", objectFit: "contain" }} />
                 </div>
-                <div className="product-info" style={{ padding: "20px" }}>
+                <div className={storeStyles['product-info']} style={{ padding: "20px" }}>
                   <h3 style={{ margin: "0 0 10px 0", color: productNameColor, fontFamily: productNameFontFamily }}>{product.name}</h3>
-                  <div className="price-tag">
-                    <span className="price" style={{ color: productPriceColor, fontWeight: "bold" }}>{product.price} MAD</span>
+                  <div className={storeStyles['price-tag']}>
+                    <span className={storeStyles.price} style={{ color: productPriceColor, fontWeight: "bold" }}>{product.price} MAD</span>
                   </div>
                 </div>
               </div>
@@ -489,34 +489,34 @@ function FinalPreview() {
         <div style={{ background: contactBgColor }}>
        <center><h1 style={{ textAlign: "center", fontSize: "2.5rem", color: "#1e293b", margin: "0 0 50px 0", fontFamily: "sans-serif" }}>Order your products now!</h1></center>
         {(whatsapp || instagram || email) && (
-          <div className="preview-buttons" style={{ padding: "40px 5%", display: "flex", justifyContent: "center", gap: "15px", flexDirection: "row", backgroundColor: contactBgColor, boxSizing: "border-box", width: "100%" }}>
-            {whatsapp && <button className="contact-btn whatsapp-btn">Contact via WhatsApp</button>}
-            {instagram && <button className="contact-btn instagram-btn">Follow on Instagram</button>}
-            {email && <button className="contact-btn email-btn">Send an Email</button>}
+          <div className={contactStyles['preview-buttons']} style={{ padding: "40px 5%", display: "flex", justifyContent: "center", gap: "15px", flexDirection: "row", backgroundColor: contactBgColor, boxSizing: "border-box", width: "100%" }}>
+            {whatsapp && <button className={`${contactStyles['contact-btn']} ${contactStyles['whatsapp-btn']}`}>Contact via WhatsApp</button>}
+            {instagram && <button className={`${contactStyles['contact-btn']} ${contactStyles['instagram-btn']}`}>Follow on Instagram</button>}
+            {email && <button className={`${contactStyles['contact-btn']} ${contactStyles['email-btn']}`}>Send an Email</button>}
           </div>
         )}
         </div>
         
         {/* CORRECTION DU FOOTER : Centrage avec max-width et max-height sur l'image */}
-        <footer className="dynamic-footer-preview" style={{ background: footerBgColor, color: footerTextColor, borderTop: `1px solid ${footerTextColor}22`, padding: "20px 5% 15px", boxSizing: "border-box", width: "100%", alignItems: "center" }}>
-          <div className="footer-main-content" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "20px", width: "100%", maxWidth: "1100px", margin: "0 auto" }}>
-            <div className="footer-brand-side" style={{ maxWidth: "350px" }}>
-              <div className="footer-logo-wrapper">
+        <footer className={footerStyles['dynamic-footer-preview']} style={{ background: footerBgColor, color: footerTextColor, borderTop: `1px solid ${footerTextColor}22`, padding: "20px 5% 15px", boxSizing: "border-box", width: "100%", alignItems: "center" }}>
+          <div className={footerStyles['footer-main-content']} style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "20px", width: "100%", maxWidth: "1100px", margin: "0 auto" }}>
+            <div className={footerStyles['footer-brand-side']} style={{ maxWidth: "350px" }}>
+              <div className={footerStyles['footer-logo-wrapper']}>
                 {data.footerLogo && <img src={data.footerLogo} alt="Logo" style={{ width: `${footerLogoWidth}px`, maxHeight: "70px", maxWidth: "100%", objectFit: 'contain' }} />}
               </div>
-              <p className="footer-desc-text" style={{ color: footerTextColor, margin: "10px 0 0 0", lineHeight: 1.4 }}>{footerDescription}</p>
+              <p className={footerStyles['footer-desc-text']} style={{ color: footerTextColor, margin: "10px 0 0 0", lineHeight: 1.4 }}>{footerDescription}</p>
             </div>
             
-            <div className="footer-right-side" style={{ maxWidth: "300px" }}>
+            <div className={footerStyles['footer-right-side']} style={{ maxWidth: "300px" }}>
               <h4 style={{ color: footerTextColor, margin: "0 0 10px 0" }}>{guaranteeTitle}</h4>
-              <ul className="guarantees-list" style={{ margin: 0, display: "flex", flexDirection: "column", gap: "5px", padding: 0, listStyle: "none" }}>
+              <ul className={footerStyles['guarantees-list']} style={{ margin: 0, display: "flex", flexDirection: "column", gap: "5px", padding: 0, listStyle: "none" }}>
                 <li style={{ color: footerTextColor }}>{guarantee1}</li>
                 <li style={{ color: footerTextColor }}>{guarantee2}</li>
                 <li style={{ color: footerTextColor }}>{guarantee3}</li>
               </ul>
             </div>
           </div>
-          <div className="footer-copyright-bar" style={{ borderTopColor: `${footerTextColor}22`, borderTopWidth: "1px", borderTopStyle: "solid", width: "100%", maxWidth: "1100px", textAlign: "center", margin: "20px auto 0", paddingTop: "15px" }}>
+          <div className={footerStyles['footer-copyright-bar']} style={{ borderTopColor: `${footerTextColor}22`, borderTopWidth: "1px", borderTopStyle: "solid", width: "100%", maxWidth: "1100px", textAlign: "center", margin: "20px auto 0", paddingTop: "15px" }}>
             <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} {storeName}. All rights reserved.</p>
           </div>
         </footer>
