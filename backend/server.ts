@@ -8,54 +8,61 @@ dotenv.config();
 
 const app = express();
 
-// 1. Enable CORS so your Netlify frontend can talk to this backend
+// Allow requests from your frontend
 app.use(cors());
+app.use(express.json());
 
-// 2. Configure multer to store the uploaded ZIP file in memory temporarily
-const upload = multer({ storage: multer.memoryStorage() });
+// Use memory storage for Vercel serverless compatibility
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-// 3. The Deployment Route
-app.post('/api/deploy', upload.single('storeZip'), async (req, res): Promise<any> => {
+app.post('/api/deploy', upload.single('storeZip'), async (req, res) => {
   try {
-    const siteName = req.query.name as string;
-    const fileBuffer = req.file?.buffer;
+    const siteName = req.query.name;
+    const zipBuffer = req.file?.buffer;
 
-    if (!fileBuffer) {
-      return res.status(400).json({ success: false, message: 'No zip file provided' });
+    if (!zipBuffer) {
+      res.status(400).json({ success: false, message: 'No zip file provided' });
+      return;
     }
 
-    // Send the ZIP file buffer directly to Netlify's API
-    const response = await axios.post(
-      `https://api.netlify.com/api/v1/sites`,
-      fileBuffer,
+    // Push the zip buffer directly to Netlify's API
+    const netlifyResponse = await axios.post(
+      'https://api.netlify.com/api/v1/sites',
+      zipBuffer,
       {
         headers: {
           'Content-Type': 'application/zip',
-          'Authorization': `Bearer ${process.env.NETLIFY_TOKEN}` // Uses your token
+          Authorization: `Bearer ${process.env.NETLIFY_TOKEN}`,
         },
         params: {
-          name: siteName // Netlify will try to use this exact name for the subdomain
-        }
+          name: siteName, 
+        },
       }
     );
 
-    // If successful, send the live URL back to the React frontend
     res.json({
       success: true,
-      liveUrl: response.data.ssl_url || response.data.url
+      liveUrl: netlifyResponse.data.ssl_url || netlifyResponse.data.url,
+      message: 'UrStore successfully deployed!',
     });
-
+    
   } catch (error: any) {
     console.error('Deployment error:', error.response?.data || error.message);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Failed to deploy to Netlify. The name might be taken or the token is invalid.' 
+    res.status(500).json({
+      success: false,
+      message: error.response?.data?.message || 'Failed to deploy to Netlify. The name might be taken.',
     });
   }
 });
 
-// 4. Listen on the dynamic port provided by the host (like Render)
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Backend server running on port ${PORT}`);
-});
+// Only listen locally, Vercel will handle the exported app instance
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+// Required for Vercel Serverless Functions
+export default app;
