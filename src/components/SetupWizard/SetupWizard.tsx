@@ -21,7 +21,7 @@ const PALETTES = [
 ];
 
 export default function SetupWizard() {
-  const setField = useStore((state: any) => state.setField);
+  const setField = useStore((state) => state.setField);
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1);

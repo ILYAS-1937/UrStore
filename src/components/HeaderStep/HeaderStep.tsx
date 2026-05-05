@@ -7,7 +7,7 @@ import useStore from '../../useStore';
 
 function HeaderStep() {
   const setField = useStore((state) => state.setField);
-  const data = useStore((state: any) => state.data) || {};
+  const data = useStore((state) => state.data) || {};
   
   // Initialize the navigator hook
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ function HeaderStep() {
   useEffect(() => { setField("navLinkColor", navLinkColor); }, [navLinkColor, setField]); 
   useEffect(() => { setField("headerLogoWidth", headerLogoWidth); }, [headerLogoWidth, setField]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleheaderLogoChange = (e: any) => {
     const file = e.target.files[0];
     if (file) {
@@ -35,7 +36,8 @@ function HeaderStep() {
   };
 
   // Intercept the form submission to show the modal instead of navigating instantly
-const handleSubmit = (e: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     navigate('/hero-step'); 
   };
@@ -44,12 +46,15 @@ const handleSubmit = (e: any) => {
     backgroundColor: headerBgColor,
     border: headerBorderColor ? `2px solid ${headerBorderColor}` : undefined,
     height: headerHeight ? `${headerHeight}px` : undefined,
-    transition: 'all 0.3s ease' 
+    transition: 'all 0.3s ease',
+    width: '60%' // Layout locked in
   };
 
   return (
-    <div className="header-step">
-      <h1><span>Step 1:</span> Customize Your Store Header</h1>
+    <div className="header-step" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+      <div style={{ width: '100%' }}>
+        <h1><span>Step 1:</span> Customize Your Store Header</h1>
+      </div>
       
       <div className="header-container" style={headerStyles}>
         <img src={headerLogo} alt="UrStore headerLogo" style={{ height: `${headerLogoWidth}px`, transition: 'height 0.2s ease' }} />
@@ -61,7 +66,7 @@ const handleSubmit = (e: any) => {
         </ul>
       </div>
 
-      <form className="header-form" onSubmit={handleSubmit}>
+      <form className="header-form" style={{ width: '30%' }} onSubmit={handleSubmit}>
 
         <label htmlFor="store-headerLogo">Import your store headerLogo:</label>
         <input type="file" id="store-headerLogo" accept='image/*' onChange={handleheaderLogoChange} />
@@ -82,8 +87,6 @@ const handleSubmit = (e: any) => {
         <label htmlFor="nav-links-color">Navigation links color:</label>
         <input type='color' className='color-picker-custom' id="nav-links-color" value={navLinkColor} onChange={(e) => setNavLinkColor(e.target.value)}/>
         
-       
-
         <label htmlFor="header-height">Header height (in px):</label>
         <input 
           type="number" 

@@ -8,7 +8,7 @@ import defaultLogo from "../../images/urStoreLogo.png";
 
 function FooterStep() {
   const setField = useStore((state) => state.setField);
-  const data = useStore((state: any) => state.data) || {}; // <-- Pull saved data
+  const data = useStore((state) => state.data) || {}; // <-- Pull saved data
 
   // --- Customization States ---
   const [footerLogo, setFooterLogo] = useState(data.footerLogo || defaultLogo);

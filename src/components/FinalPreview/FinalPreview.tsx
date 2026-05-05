@@ -45,19 +45,19 @@ function FinalPreview() {
   const subtitleFont = data.subtitleFont || "inherit";
   const paragraphFont = data.paragraphFont || "inherit";
 
-  const heroTitle = data.heroTitle || "Your hero";
-  const heroSubtitle = data.heroSubtitle || "Your hero subtitle";
-  const heroDescription = data.heroDescription || "your hero description.";
+  const heroTitle = data.heroTitle ;
+  const heroSubtitle = data.heroSubtitle ;
+  const heroDescription = data.heroDescription;
   const heroImgWidth = data.heroImgWidth || 100;
 
   const footerBgColor = data.footerBgColor || "#ffffff";
   const footerTextColor = data.footerTextColor || "#1f2937";
-  const footerDescription = data.footerDescription || "Your store, your style, zero code.";
-  const storeName = data.storeName || "UrStore";
-  const guaranteeTitle = data.guaranteeTitle || "Our Guarantees";
-  const guarantee1 = data.guarantee1 || "🚚 Free Shipping";
-  const guarantee2 = data.guarantee2 || "🔒 Secure Payment";
-  const guarantee3 = data.guarantee3 || "💬 24/7 Support";
+  const footerDescription = data.footerDescription ;
+  const storeName = data.storeName ;
+  const guaranteeTitle = data.guaranteeTitle ;
+  const guarantee1 = data.guarantee1 ;
+  const guarantee2 = data.guarantee2 ;
+  const guarantee3 = data.guarantee3 ;
   const footerLogoWidth = data.footerLogoWidth || 120;
 
   const products = data.products || [];
@@ -84,7 +84,7 @@ function FinalPreview() {
         const blob = await res.blob();
         imgFolder?.file(name, blob); 
         return `./images/${name}`; 
-      } catch (error) { 
+      } catch { 
         return ""; 
       }
     };
@@ -94,7 +94,7 @@ function FinalPreview() {
     const heroPath = await processImage(data.currentImage, "hero.png");
     
     const processedProducts = await Promise.all(
-      products.map(async (p: any, i: number) => ({
+      products.map(async (p :{ imageUrl: string; [key: string]: unknown }, i: number) => ({
         ...p,
         localPath: await processImage(p.imageUrl, `product-${i}.png`)
       }))
@@ -140,8 +140,8 @@ function FinalPreview() {
       .heroTitle{ margin-top: 10px; font-size: 50px; color: #2d3748; padding: 5px; font-weight: 700; text-align: center; }
       .store-section { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; width: 100%; margin: 0 auto; padding: 30px 20px; color: #0f172a; }
       .store-title { text-align: center; font-size: 2.5rem; color: #1e293b; margin: 0 0 50px 0; font-family: sans-serif; }
-      .products-grid { margin: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; justify-content: center; }
-      .product-card { background: white; border: 1px solid #f1f5f9; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+      .products-grid { margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; max-width: 1200px; }
+      .product-card { width: 280px; background: white; border: 1px solid #f1f5f9; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
       .product-image-container { width: 100%; height: 220px; background-color: #ffffff; padding: 20px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #f8fafc; }
       .product-image-container img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.4s ease; }
       .product-card:hover .product-image-container img {transform: scale(1.08)}
@@ -469,9 +469,9 @@ function FinalPreview() {
 
         <div style={{ backgroundColor: inventoryBgColor, padding: "80px 5%", boxSizing: "border-box", width: "100%" }}>
           <h2 style={{ textAlign: "center", fontSize: "2.5rem", color: "#1e293b", margin: "0 0 50px 0", fontFamily: "sans-serif" }}>Nos Produits</h2>
-          <div className="products-grid" style={{ padding: 0 }}>
-            {products.map((product: any) => (
-              <div key={product.id} className="product-card" style={{ backgroundColor: productCardBgColor }}>
+         <div className="products-grid" style={{ padding: 0, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "28px" }}>
+            {products.map((product: { id: string | number; imageUrl: string; name: string; price: number | string }) => (
+             <div key={product.id} className="product-card" style={{ backgroundColor: productCardBgColor, width: "280px" }}>
                 <div className="product-image-container" style={{ backgroundColor: productImageBgColor }}>
                   <img src={product.imageUrl} alt={product.name} style={{ maxWidth: "100%", objectFit: "contain" }} />
                 </div>

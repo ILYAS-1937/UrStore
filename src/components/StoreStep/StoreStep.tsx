@@ -29,7 +29,7 @@ const fontFamilies = [
 
 export default function StoreStep() {
   const setField = useStore((state) => state.setField);
-  const data = useStore((state: any) => state.data) || {}; // <-- Pull saved data
+  const data = useStore((state) => state.data) || {}; // <-- Pull saved data
   
   // --- Existing Product State ---
   const [products, setProducts] = useState<Product[]>(data.products || []);
@@ -75,7 +75,7 @@ export default function StoreStep() {
     } else {
       // Add new product
       const newProduct: Product = {
-        id: Date.now().toString(),
+        id:crypto.randomUUID(),
         name,
         price: Number(price),
         imageUrl: imagePreview,
