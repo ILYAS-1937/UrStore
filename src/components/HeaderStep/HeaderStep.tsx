@@ -47,16 +47,22 @@ function HeaderStep() {
     border: headerBorderColor ? `2px solid ${headerBorderColor}` : undefined,
     height: headerHeight ? `${headerHeight}px` : undefined,
     transition: 'all 0.3s ease',
-    width: '60%' // Layout locked in
+    // --- LARGEUR FIXE SUPPRIMÉE ICI ---
+    // width: '60%' // Layout locked in -> C'est ça qui casse tout sur mobile !
   };
 
   return (
-    <div className={styles['header-step']} style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-      <div style={{ width: '100%' }}>
+    // --- STYLES EN LIGNE SUPPRIMÉS ICI ---
+    // <div className={styles['header-step']} style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+    <div className={styles['header-step']}>
+      {/* --- LARGEUR EN LIGNE SUPPRIMÉE ICI --- */}
+      {/* <div style={{ width: '100%' }}> */}
+      <div>
         <h1><span>Step 1:</span> Customize Your Store Header</h1>
       </div>
       
       <div className={styles['header-container']} style={headerStyles}>
+        {/* --- LARGEUR DYNAMIQUE RESTE POUR BUREAU, MAIS LE CSS LA FORCE SUR MOBILE --- */}
         <img src={headerLogo} alt="UrStore headerLogo" style={{ height: `${headerLogoWidth}px`, transition: 'height 0.2s ease' }} />
         <ul>
           <li><a href="#home" style={{ color: navLinkColor }}>Home</a></li>
@@ -66,7 +72,9 @@ function HeaderStep() {
         </ul>
       </div>
 
-      <form className={styles['header-form']} style={{ width: '30%' }} onSubmit={handleSubmit}>
+      {/* --- LARGEUR EN LIGNE SUPPRIMÉE ICI --- */}
+      {/* <form className={styles['header-form']} style={{ width: '30%' }} onSubmit={handleSubmit}> */}
+      <form className={styles['header-form']} onSubmit={handleSubmit}>
 
         <label htmlFor="store-headerLogo">Import your store headerLogo:</label>
         <input type="file" id="store-headerLogo" accept='image/*' onChange={handleheaderLogoChange} />

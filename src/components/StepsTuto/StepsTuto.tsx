@@ -38,7 +38,7 @@ function StepsTuto() {
         </div>
         <div className={styles.step}>
           <h3><span>Step 6:</span> Get your Store</h3>
-          <p>Download your completed store’s source code (HTML, CSS, and images).</p>
+          <p>Download your completed store's source code (HTML, CSS, and images), and deploy it instantly to web.</p>
           <img src={getStoreImg} alt="Get Store Tutorial" />
         </div>
       </div>

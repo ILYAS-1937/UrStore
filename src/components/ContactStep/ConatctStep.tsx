@@ -50,7 +50,7 @@ function ContactStep() {
               {email && (
                 <button className={`${styles['contact-btn']} ${styles['email-btn']}`}>
                   <img src={gmailImg} alt="Gmail" />
-                  Send an Email
+                  Contact us via Email
                 </button>
               )}
               {!whatsapp && !instagram && !email && (

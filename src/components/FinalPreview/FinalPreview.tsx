@@ -136,8 +136,7 @@ function FinalPreview() {
         object-fit: cover; 
         animation: float 4s ease-in-out infinite; /* Added Floating Animation */
       }
-      
-      .heroTitle{ margin-top: 10px; font-size: 50px; color: #2d3748; padding: 5px; font-weight: 700; text-align: center; }
+      .heroTitle{ margin-top: 10px; font-size: clamp(2rem, 4vw, 2.5rem); color: #1e293b; padding: 5px; font-weight: 700; text-align: center; font-family: sans-serif; }
       .store-section { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; width: 100%; margin: 0 auto; padding: 30px 20px; color: #0f172a; }
       .store-title { text-align: center; font-size: 2.5rem; color: #1e293b; margin: 0 0 50px 0; font-family: sans-serif; }
       .products-grid { margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; max-width: 1200px; }
@@ -148,7 +147,7 @@ function FinalPreview() {
       .product-card:hover { transform: translateY(-6px);box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04)}
       
       /* --- FIX 3: Contact Buttons Hover Animations --- */
-      .preview-buttons { padding: 40px 5%; display: flex; justify-content: center; gap: 15px; }
+      .preview-buttons { padding: 40px 5%; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
       .contact-btn { 
         padding: 12px 25px; 
         border: none; 
@@ -231,7 +230,7 @@ function FinalPreview() {
         <div id="contact" class="preview-buttons">
             ${whatsapp ? `<a href="https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}" target="_blank"><button class="contact-btn whatsapp-btn">Contact via WhatsApp</button></a>` : ''}
             ${instagram ? `<a href="https://instagram.com/${instagram.replace('@', '')}" target="_blank"><button class="contact-btn instagram-btn">Follow on Instagram</button></a>` : ''}
-            ${email ? `<a href="mailto:${email}" target="_blank"><button class="contact-btn email-btn">Send an Email</button></a>` : ''}
+            ${email ? `<a href="mailto:${email}" target="_blank"><button class="contact-btn email-btn">Contact us via Email</button></a>` : ''}
         </div>` : ''}
     </div>
 
@@ -323,10 +322,76 @@ function FinalPreview() {
   return (
     <div style={{ backgroundColor: "#f1f5f9", minHeight: "100vh", paddingBottom: "50px" }}>
       
-      <style>
+<style>
         {`
           .anti-gap-preview .${headerStyles['header-container']}, 
           .anti-gap-preview .${heroStyles['hero-container']} { margin: 0 !important; position: static !important; top: auto !important; transform: none !important; }
+          
+          /* --- CLASSES POUR LA BARRE SUPÉRIEURE RESPONSIVE --- */
+          .preview-top-bar {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+          }
+          
+          .preview-buttons-container {
+            display: flex;
+            gap: 15px;
+          }
+
+          /* --- CONTENEUR DES BOUTONS DE CONTACT (VERSION PC) --- */
+          .responsive-contact-container {
+            padding: 40px 5%;
+            display: flex !important;
+            flex-direction: row !important; /* Force l'affichage côte à côte sur PC */
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 15px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          
+          .responsive-contact-container button {
+            width: auto !important; /* Force la taille normale du bouton sur PC */
+            padding: 12px 25px !important;
+          }
+
+          /* --- MOBILE RESPONSIVENESS (Ecrans < 768px) --- */
+          @media (max-width: 768px) {
+            .preview-top-bar {
+              flex-direction: column !important;
+              gap: 20px !important;
+              text-align: center !important;
+              position: relative !important;
+            }
+            .preview-top-bar h1 {
+              font-size: 32px !important;
+              line-height: 1.2 !important;
+            }
+            .preview-buttons-container {
+              flex-direction: column !important;
+              width: 100% !important;
+            }
+            .preview-buttons-container button {
+              width: 100% !important;
+            }
+
+            /* --- BOUTONS DE CONTACT (VERSION MOBILE) --- */
+            .responsive-contact-container {
+              flex-direction: column !important; /* Empile les boutons verticalement sur mobile */
+            }
+            .responsive-contact-container button {
+              width: 100% !important; /* Prend toute la largeur disponible */
+              max-width: 300px !important; /* Sauf si l'écran est très large */
+              padding: 15px !important;
+            }
+          }
         `}
       </style>
 
@@ -412,11 +477,12 @@ function FinalPreview() {
         </div>
       )}
 
-      {/* BARRE DU BUILDER MODIFIÉE POUR INCLURE LE BOUTON DEPLOY */}
-      <div style={{ padding: "20px 5%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, zIndex: 1000 }}>
-        <h2 style={{ margin: 0, color: "#1e293b" }}></h2>
-        <h1 className={heroStyles.heroTitle}><span>Final Step:</span> Your Store Preview</h1>
-        <div style={{ display: "flex", gap: "15px" }}>
+     {/* BARRE DU BUILDER MODIFIÉE POUR INCLURE LE BOUTON DEPLOY */}
+      <div className="preview-top-bar">
+        {/* J'ai supprimé le <h2> vide qui perturbait le centrage */}
+        <h1 className={heroStyles.heroTitle} style={{ margin: 0 }}><span>Final Step:</span> Your Store Preview</h1>
+        
+        <div className="preview-buttons-container">
           <button 
             onClick={handleDownload}
             disabled={isDownloading}
@@ -486,13 +552,14 @@ function FinalPreview() {
           </div>
         </div>
 
-        <div style={{ background: contactBgColor }}>
+<div style={{ background: contactBgColor }}>
        <center><h1 style={{ textAlign: "center", fontSize: "2.5rem", color: "#1e293b", margin: "0 0 50px 0", fontFamily: "sans-serif" }}>Order your products now!</h1></center>
-        {(whatsapp || instagram || email) && (
-          <div className={contactStyles['preview-buttons']} style={{ padding: "40px 5%", display: "flex", justifyContent: "center", gap: "15px", flexDirection: "row", backgroundColor: contactBgColor, boxSizing: "border-box", width: "100%" }}>
+       {(whatsapp || instagram || email) && (
+          <div className={`${contactStyles['preview-buttons']} responsive-contact-container`} style={{ backgroundColor: contactBgColor }}>
+            {/* --- NOUVEAU : Application de la classe responsive et nettoyage des styles en ligne --- */}
             {whatsapp && <button className={`${contactStyles['contact-btn']} ${contactStyles['whatsapp-btn']}`}>Contact via WhatsApp</button>}
             {instagram && <button className={`${contactStyles['contact-btn']} ${contactStyles['instagram-btn']}`}>Follow on Instagram</button>}
-            {email && <button className={`${contactStyles['contact-btn']} ${contactStyles['email-btn']}`}>Send an Email</button>}
+            {email && <button className={`${contactStyles['contact-btn']} ${contactStyles['email-btn']}`}>Contact us via Email</button>}
           </div>
         )}
         </div>

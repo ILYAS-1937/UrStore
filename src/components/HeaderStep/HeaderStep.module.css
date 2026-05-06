@@ -221,6 +221,15 @@
    3. MOBILE RESPONSIVENESS (Max 600px)
    ========================================= */
 @media (max-width: 600px) {
+    /* Nouveau: Empile le titre, la prévisualisation et le formulaire */
+    .header-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0 10px;
+    }
+
     .header-step h1, 
     .header-step span {
         font-size: 30px; /* Scale text for small phones */
@@ -231,11 +240,16 @@
         gap: 15px;
         width: 95%; /* Use almost full width */
         padding: 15px;
+        position: relative; /* S'assure que c'est bien positionné */
+        top: 0;
+        left: 0;
+        margin: 10px auto; /* Centre la prévisualisation */
     }
 
     /* Shrink logo slightly for mobile */
     .header-container img {
         height: 70px;
+        width: auto !important; /* Force width auto pour mobile */
     }
 
     /* Stack the navigation links vertically */
@@ -250,5 +264,6 @@
         width: 95%; /* Maximize space for the form */
         padding: 25px 20px; /* Reduce padding to save screen real estate */
         box-sizing: border-box;
+        margin: 10px auto; /* Centre le formulaire */
     }
 }
