@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 function Header() {
   return (
     <header className={styles.header}>
-      <img className={styles.logo} src={logo} alt="Logo" />
+      <img className={styles.logo} src={logo} alt="Logo" onClick={() => window.location.reload()} 
+        style={{ cursor: 'pointer' }} />
       
       <nav className={styles['nav-links']}>
         <ul>
