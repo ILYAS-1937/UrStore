@@ -19,8 +19,7 @@ function Footer() {
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About Us</a></li>
-            <li><a href="/store">Store</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/faq">FAQ</a></li>
           </ul>
         </div>
 
@@ -28,9 +27,9 @@ function Footer() {
         <div className={styles['footer-social']}>
           <h3>Follow Us</h3>
           <ul>
-            <li><a href="#twitter">Twitter</a></li>
-            <li><a href="#instagram">Instagram</a></li>
-            <li><a href="#linkedin">LinkedIn</a></li>
+            <li><a href="https://www.x.com/medurtc">Twitter</a></li>
+            <li><a href="https://www.instagram.com/m3d.5">Instagram</a></li>
+            <li><a href="https://www.linkedin.com/in/medmoataz">LinkedIn</a></li>
           </ul>
         </div>
       </div>
