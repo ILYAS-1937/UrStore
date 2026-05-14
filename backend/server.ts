@@ -9,7 +9,11 @@ dotenv.config();
 const app = express();
 
 // Allow requests from your frontend
-app.use(cors());
+app.use(cors({
+    origin: 'https://urstores.netlify.app', // Allow your frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 app.use(express.json());
 
 // Use memory storage for Vercel serverless compatibility
