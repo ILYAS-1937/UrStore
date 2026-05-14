@@ -11,7 +11,7 @@ const app = express();
 // Allow requests from your frontend
 app.use(cors({
     origin: 'https://urstores.netlify.app', // Allow your frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
     credentials: true
 }));
 app.use(express.json());
