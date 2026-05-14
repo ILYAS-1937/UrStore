@@ -27,9 +27,9 @@ function Footer() {
         <div className={styles['footer-social']}>
           <h3>Follow Us</h3>
           <ul>
-            <li><a href="https://www.x.com/medurtc">Twitter</a></li>
-            <li><a href="https://www.instagram.com/m3d.5">Instagram</a></li>
-            <li><a href="https://www.linkedin.com/in/medmoataz">LinkedIn</a></li>
+            <li><a href="https://www.threads.com/@ilyaswinstarzi">Twitter</a></li>
+            <li><a href="https://www.instagram.com/ilyaswinstarzi">Instagram</a></li>
+            <li><a href="https://www.linkedin.com/in/ilyas-tarzi/">LinkedIn</a></li>
           </ul>
         </div>
       </div>
